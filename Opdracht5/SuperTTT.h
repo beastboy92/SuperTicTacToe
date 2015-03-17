@@ -16,7 +16,7 @@ public:
 
 	Side side(int row, int column, int board) const;
 	bool isUndecided() const;
-	bool playMove(Side s, int row, int column);
+	bool playMove(Side s, int board, int row, int column);
 	bool boardIsFull() const;
 	bool isAWin(Side s) const;
 private:

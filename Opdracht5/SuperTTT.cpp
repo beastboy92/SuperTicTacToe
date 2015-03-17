@@ -20,11 +20,10 @@ bool SuperTTT::isUndecided() const {
 	return value() == UNDECIDED;
 }
 
-bool SuperTTT::playMove(Side s, int row, int column) {
-	//if (row < 0 || row >= 3 || column < 0 || column >= 3 || board(row, column) != EMPTY)
-	//	return false;
-	//board(row, column) = s;
-	//return true;
+bool SuperTTT::playMove(Side s, int board, int row, int column) {
+	if (row < 0 || row >= 3 || column < 0 || column >= 3 || boards[board](row, column) != EMPTY)
+		return false;
+	boards[board](row, column) = s;
 	return true;
 }
 
@@ -44,5 +43,4 @@ bool SuperTTT::isAWin(Side s) const {
 	//}
 	//return (board(0, 0) == s && board(1, 1) == s && board(2, 2) == s) ||
 	//	(board(0, 2) == s && board(1, 1) == s && board(2, 0) == s);
-	return true;
 }

@@ -4,20 +4,19 @@ using namespace std;
 
 ConsoleTTTGame::ConsoleTTTGame(bool computerGoesFirst) :
 	computerSymbol(computerGoesFirst ? 'x' : 'o'), humanSymbol(computerGoesFirst ? 'o' : 'x') {
-	//	if (computerGoesFirst) {
-	//		askMove(SuperTTT::COMPUTER);
-	//		cout << endl;
-	//	}
-	printBoard();
+		if (computerGoesFirst) {
+			askMove(SuperTTT::COMPUTER);
+			cout << endl;
+		}
 }
 
 void ConsoleTTTGame::askMove(SuperTTT::Side side){
-	int row, column;
+	int board, row, column;
 	do {
 		printBoard();
-		cout << endl << "Enter column and row (starts at 0): ";
-		cin >> column >> row;
-	} while (!t.playMove(side, row, column));
+		cout << endl << "Enter board, column and row (starts at 0): ";
+		cin >> board >> column >> row;
+	} while (!t.playMove(side, board, row, column));
 	cout << endl;
 }
 
@@ -41,9 +40,13 @@ void ConsoleTTTGame::play() {
 }
 
 void ConsoleTTTGame::printBoard() const {
-	string streep(9, '-');
-	cout << streep << endl;
+	string streep("---+---+---");
+
 	for (int row = 0; row < 9; row++){
+		if (row % 3 == 0 && row != 0) {
+			cout << streep << endl;
+		}
+
 		if (row < 3){
 			for (int board = 1; board <= 3; board++){
 				for (int column = 0; column < 3; column++){
@@ -52,8 +55,10 @@ void ConsoleTTTGame::printBoard() const {
 					else if (t.side(row, column, board) == SuperTTT::HUMAN)
 						cout << humanSymbol;
 					else
-						cout << 'G';
+						cout << ' ';
 				}
+				if (board != 3)
+					cout << "|";
 			}
 			cout << endl;
 		}
@@ -65,8 +70,10 @@ void ConsoleTTTGame::printBoard() const {
 					else if (t.side(row-3, column, board) == SuperTTT::HUMAN)
 						cout << humanSymbol;
 					else
-						cout << 'H';
+						cout << ' ';
 				}
+				if (board != 6)
+					cout << "|";
 			}
 			cout << endl;
 		}
@@ -78,11 +85,12 @@ void ConsoleTTTGame::printBoard() const {
 					else if (t.side(row-6, column, board) == SuperTTT::HUMAN)
 						cout << humanSymbol;
 					else
-						cout << 'I';
+						cout << ' ';
 				}
+				if (board != 9)
+					cout << "|";
 			}
 			cout << endl;
 		}
 	}
-	cout << streep << endl;
 }

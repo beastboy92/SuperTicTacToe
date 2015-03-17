@@ -3,19 +3,18 @@
 using namespace std;
 
 int main(){
-	ConsoleTTTGame game(true);
-	//cout << "Welcome to TIC-TAC-TOE" << endl;
-	//bool computerGoesFirst = true;
-	//char again;
-	//do {
-	//	ConsoleTTTGame game(computerGoesFirst);
-	//	game.play();
-	//	do {
-	//		cout << "Play again (y/n)? ";
-	//		cin >> again;
-	//	} while (again != 'y' && again != 'Y' && again != 'n' && again != 'N');
-	//	computerGoesFirst = !computerGoesFirst;
-	//	cout << endl;
-	//} while (again != 'n' && again != 'N');
+	cout << "Welcome to TIC-TAC-TOE" << endl;
+	bool computerGoesFirst = true;
+	char again;
+	do {
+		ConsoleTTTGame game(computerGoesFirst);
+		game.play();
+		do {
+			cout << "Play again (y/n)? ";
+			cin >> again;
+		} while (again != 'y' && again != 'Y' && again != 'n' && again != 'N');
+		computerGoesFirst = !computerGoesFirst;
+		cout << endl;
+	} while (again != 'n' && again != 'N');
 	return 0;
 }
