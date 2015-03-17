@@ -4,11 +4,11 @@ using namespace std;
 
 ConsoleTTTGame::ConsoleTTTGame(bool computerGoesFirst) :
 	computerSymbol(computerGoesFirst ? 'x' : 'o'), humanSymbol(computerGoesFirst ? 'o' : 'x') {
-	//	if (computerGoesFirst) {
-	//		askMove(SuperTTT::COMPUTER);
-	//		cout << endl;
-	//	}
-	printBoard();
+		if (computerGoesFirst) {
+			askMove(SuperTTT::COMPUTER);
+			cout << endl;
+		}
+	//printBoard();
 }
 
 void ConsoleTTTGame::askMove(SuperTTT::Side side){
@@ -41,9 +41,21 @@ void ConsoleTTTGame::play() {
 }
 
 void ConsoleTTTGame::printBoard() const {
-	string streep(9, '-');
+	string streep(3, '-');
 	cout << streep << endl;
-	for (int row = 0; row < 9; row++){
+	for (int row = 0; row < 3; ++row) {
+		for (int column = 0; column < 3; ++column)
+		{
+			if (t.side(row, column) == SuperTTT::COMPUTER)
+				cout << computerSymbol;
+			else if (t.side(row, column) == SuperTTT::HUMAN)
+				cout << humanSymbol;
+			else
+				cout << ' ';
+		}
+		cout << endl;
+	}
+	/*for (int row = 0; row < 9; row++){
 		if (row < 3){
 			for (int board = 1; board <= 3; board++){
 				for (int column = 0; column < 3; column++){
@@ -83,6 +95,6 @@ void ConsoleTTTGame::printBoard() const {
 			}
 			cout << endl;
 		}
-	}
+	}*/
 	cout << streep << endl;
 }
