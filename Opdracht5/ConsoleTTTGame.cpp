@@ -40,11 +40,12 @@ void ConsoleTTTGame::play() {
 }
 
 void ConsoleTTTGame::printBoard() const {
-	string streep("---+---+---");
+	string streeplang("---+---+---");
+	string streepkort(3, '-');
 
 	for (int row = 0; row < 9; row++){
 		if (row % 3 == 0 && row != 0) {
-			cout << streep << endl;
+			cout << streeplang << endl;
 		}
 
 		if (row < 3){
@@ -93,4 +94,16 @@ void ConsoleTTTGame::printBoard() const {
 			cout << endl;
 		}
 	}
+	cout << streepkort << endl;
+	for (int row = 0; row < 3; ++row) {
+		for (int column = 0; column < 3; ++column)
+		if (t.side(row, column, 0) == SuperTTT::COMPUTER)
+			cout << computerSymbol;
+		else if (t.side(row, column, 0) == SuperTTT::HUMAN)
+			cout << humanSymbol;
+		else
+			cout << ' ';
+		cout << endl;
+	}
+	cout << streepkort << endl;
 }
