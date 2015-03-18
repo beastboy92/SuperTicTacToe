@@ -50,12 +50,12 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_CONSOLE;WINVER=0x0400;__WXMSW__;_DEBUG;__WXDEBUG__;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_WINDOW;WINVER=0x0400;__WXMSW__;_DEBUG;__WXDEBUG__;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>$(Wxwidgets)\include\msvc;$(Wxwidgets)\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(Wxwidgets)\lib\vc_lib</AdditionalLibraryDirectories>
     </Link>
@@ -80,11 +80,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ConsoleTTTGame.cpp" />
+    <ClCompile Include="Frame.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="SuperTTT.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ConsoleTTTGame.h" />
+    <ClInclude Include="Frame.h" />
+    <ClInclude Include="main.h" />
     <ClInclude Include="Matrix.h" />
     <ClInclude Include="SuperTTT.h" />
   </ItemGroup>
