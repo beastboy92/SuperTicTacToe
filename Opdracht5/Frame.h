@@ -24,7 +24,7 @@ class BasicDrawPane : public wxPanel
 {
 
 public:
-	BasicDrawPane(wxFrame* parent);
+	BasicDrawPane(wxPanel* parent, bool cross);
 
 	void paintEvent(wxPaintEvent & evt);
 	void paintNow();
@@ -43,5 +43,8 @@ public:
 	void keyReleased(wxKeyEvent& event);
 	*/
 
-	DECLARE_EVENT_TABLE()
+private:
+	bool cross;
+
+	wxDECLARE_EVENT_TABLE();
 };
