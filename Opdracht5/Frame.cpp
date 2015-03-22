@@ -13,20 +13,27 @@ TTTFrame::TTTFrame(const wxString& title)
 
 	wxStaticText *topBar = new wxStaticText(panel, -1, wxT("Welcome to Tic Tac Toe"));
 
-	BasicDrawPane *drawPanel1 = new BasicDrawPane(panel, true);
-	BasicDrawPane *drawPanel2 = new BasicDrawPane(panel, false);
-	BasicDrawPane *drawPanel3 = new BasicDrawPane(panel, true);
-	BasicDrawPane *drawPanel4 = new BasicDrawPane(panel, false);
-	BasicDrawPane *drawPanel5 = new BasicDrawPane(panel, true);
-	BasicDrawPane *drawPanel6 = new BasicDrawPane(panel, false);
-	BasicDrawPane *drawPanel7 = new BasicDrawPane(panel, true);
-	BasicDrawPane *drawPanel8 = new BasicDrawPane(panel, false);
-	BasicDrawPane *drawPanel9 = new BasicDrawPane(panel, true);
+	/*BasicDrawPanel *drawPanel1 = new BasicDrawPanel(panel, true);
+	BasicDrawPanel *drawPanel2 = new BasicDrawPanel(panel, false);
+	BasicDrawPanel *drawPanel3 = new BasicDrawPanel(panel, true);
+	BasicDrawPanel *drawPanel4 = new BasicDrawPanel(panel, false);
+	BasicDrawPanel *drawPanel5 = new BasicDrawPanel(panel, true);
+	BasicDrawPanel *drawPanel6 = new BasicDrawPanel(panel, false);
+	BasicDrawPanel *drawPanel7 = new BasicDrawPanel(panel, true);
+	BasicDrawPanel *drawPanel8 = new BasicDrawPanel(panel, false);
+	BasicDrawPanel *drawPanel9 = new BasicDrawPanel(panel, true);*/
+
+	for (int row = 0; row < 3; ++row) {
+		for (int column = 0; column < 3; ++column)
+		{
+			drawPanel(row, column) = new BasicDrawPanel(panel, true);
+		}
+	}
 	
 	vbox->Add(topBar, 0, wxEXPAND);
 	vbox->Add(gridBox, 0, wxALIGN_CENTER);
 
-	gridBox->Add(drawPanel1, 0);
+	/*gridBox->Add(drawPanel1, 0);
 	gridBox->Add(drawPanel2, 0);
 	gridBox->Add(drawPanel3, 0);
 	gridBox->Add(drawPanel4, 0);
@@ -34,7 +41,14 @@ TTTFrame::TTTFrame(const wxString& title)
 	gridBox->Add(drawPanel6, 0);
 	gridBox->Add(drawPanel7, 0);
 	gridBox->Add(drawPanel8, 0);
-	gridBox->Add(drawPanel9, 0);
+	gridBox->Add(drawPanel9, 0);*/
+
+	for (int row = 0; row < 3; ++row) {
+		for (int column = 0; column < 3; ++column)
+		{
+			gridBox->Add(drawPanel(row, column));
+		}
+	}
 	panel->SetSizer(vbox);
 
 	SetMinSize(wxSize(300, 325));
@@ -55,40 +69,47 @@ void TTTFrame::OnExit(wxCommandEvent& event)
 }
 
 
-wxBEGIN_EVENT_TABLE(BasicDrawPane, wxPanel)
+wxBEGIN_EVENT_TABLE(BasicDrawPanel, wxPanel)
 // some useful events
 /*
-EVT_MOTION(BasicDrawPane::mouseMoved)
-EVT_LEFT_DOWN(BasicDrawPane::mouseDown)
-EVT_LEFT_UP(BasicDrawPane::mouseReleased)
-EVT_RIGHT_DOWN(BasicDrawPane::rightClick)
-EVT_LEAVE_WINDOW(BasicDrawPane::mouseLeftWindow)
-EVT_KEY_DOWN(BasicDrawPane::keyPressed)
-EVT_KEY_UP(BasicDrawPane::keyReleased)
-EVT_MOUSEWHEEL(BasicDrawPane::mouseWheelMoved)
+EVT_MOTION(BasicDrawPanel::mouseMoved)
+EVT_LEFT_DOWN(BasicDrawPanel::mouseDown)
+EVT_LEFT_UP(BasicDrawPanel::mouseReleased)
+EVT_RIGHT_DOWN(BasicDrawPanel::rightClick)
+EVT_LEAVE_WINDOW(BasicDrawPanel::mouseLeftWindow)
+EVT_KEY_DOWN(BasicDrawPanel::keyPressed)
+EVT_KEY_UP(BasicDrawPanel::keyReleased)
+EVT_MOUSEWHEEL(BasicDrawPanel::mouseWheelMoved)
 */
 // catch paint events
-EVT_PAINT(BasicDrawPane::paintEvent)
+EVT_PAINT(BasicDrawPanel::paintEvent)
+EVT_LEFT_DOWN(BasicDrawPanel::mouseDown)
 wxEND_EVENT_TABLE()
 
-BasicDrawPane::BasicDrawPane(wxPanel* parent, bool cross) :
-wxPanel(parent, -1, wxDefaultPosition, wxSize(80, 80)), cross(cross)
+BasicDrawPanel::BasicDrawPanel(wxPanel* parent, bool cross) :
+wxPanel(parent, -1, wxDefaultPosition, wxSize(80, 80)), cross(cross), click(false)
 {
 }
 
-void BasicDrawPane::paintEvent(wxPaintEvent & evt)
+void BasicDrawPanel::paintEvent(wxPaintEvent & evt)
 {
 	wxPaintDC dc(this);
 	render(dc);
 }
 
-void BasicDrawPane::paintNow()
+void BasicDrawPanel::paintNow()
 {
 	wxClientDC dc(this);
 	render(dc);
 }
 
-void BasicDrawPane::render(wxDC&  dc)
+void BasicDrawPanel::mouseDown(wxMouseEvent& event)
+{
+	click = true;
+	paintNow();
+}
+
+void BasicDrawPanel::render(wxDC&  dc)
 {
 	///// draw some text
 	//dc.DrawText(wxT("Testing"), 40, 60);
@@ -112,13 +133,16 @@ void BasicDrawPane::render(wxDC&  dc)
 	DoGetClientSize(&width, &heigth);
 
 	dc.SetBrush(*wxTRANSPARENT_BRUSH);	
-	if (cross){
-		dc.DrawLine(5, 5, width - 5, heigth - 5);
-		dc.DrawLine(width - 5, 5, 5, heigth - 5);
-	}
-	else
-	{
-		dc.DrawCircle(width / 2, heigth / 2, width / 2 - 5 /* radius */);
-	}
+	//dc.SetBrush(*wxRED_BRUSH);
 	dc.DrawRectangle(0, 0, width, width);
+	if (click){
+		if (cross){
+			dc.DrawLine(5, 5, width - 5, heigth - 5);
+			dc.DrawLine(width - 5, 5, 5, heigth - 5);
+		}
+		else
+		{
+			dc.DrawCircle(width / 2, heigth / 2, width / 2 - 5 /* radius */);
+		}
+	}	
 }

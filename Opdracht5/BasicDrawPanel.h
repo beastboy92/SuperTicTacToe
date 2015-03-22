@@ -1,16 +1,17 @@
 #pragma once
 
 #include <wx/wx.h>
-#include "Matrix.h"
+#include "SuperTTT.h"
 
 class BasicDrawPanel : public wxPanel
 {
 
 public:
-	BasicDrawPanel(wxPanel* parent, bool cross);
+	BasicDrawPanel(wxPanel* parent, SuperTTT* t, int panel);
 
 	void paintEvent(wxPaintEvent & evt);
 	void mouseDown(wxMouseEvent& event);
+	void mouseReleased(wxMouseEvent& event);
 	void paintNow();
 
 	void render(wxDC& dc);
@@ -30,25 +31,8 @@ public:
 private:
 	bool cross;
 	bool click;
-
-	wxDECLARE_EVENT_TABLE();
-};
-
-class TTTFrame : public wxFrame
-{
-public:
-	TTTFrame(const wxString& title);
-
-	wxMenuBar *menubar;
-	wxMenu *file;
-	//wxMenu *edit;
-	//wxMenu *help;
-	//wxTextCtrl *Input;
-	//wxStaticText *BottomBar;
-private:
-	void OnExit(wxCommandEvent& event);
-	matrix<BasicDrawPanel*, 3, 3> drawPanel;
-	//void OnTextEnter(wxCommandEvent& event);
+	int panel;
+	SuperTTT* t;
 
 	wxDECLARE_EVENT_TABLE();
 };

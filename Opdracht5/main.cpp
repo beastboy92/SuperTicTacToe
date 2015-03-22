@@ -21,7 +21,7 @@
 //}
 
 #include "main.h"
-#include "Frame.h"
+#include "TTTFrame.h"
 
 IMPLEMENT_APP(TTTApp)
 

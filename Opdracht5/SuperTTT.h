@@ -20,9 +20,12 @@ public:
 	bool playMove(Side s, int row, int column);
 	bool boardIsFull() const;
 	bool isAWin(Side s) const;
+	Side giveLastPlayer() const;
+	void setLastPlayer(Side s);
 private:
 	typedef matrix<Side, 3, 3> Board;
 	Board board;
 	//std::array<Board, 10> boards;
 	Value value() const;
+	Side lastPlayer;
 };

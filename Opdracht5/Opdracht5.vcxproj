@@ -79,17 +79,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BasicDrawPanel.cpp" />
     <ClCompile Include="ConsoleTTTGame.cpp" />
-    <ClCompile Include="Frame.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="SuperTTT.cpp" />
+    <ClCompile Include="TTTFrame.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BasicDrawPanel.h" />
     <ClInclude Include="ConsoleTTTGame.h" />
-    <ClInclude Include="Frame.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="Matrix.h" />
     <ClInclude Include="SuperTTT.h" />
+    <ClInclude Include="TTTFrame.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
