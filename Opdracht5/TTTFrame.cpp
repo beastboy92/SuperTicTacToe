@@ -1,13 +1,15 @@
 #include "TTTFrame.h"
+#include <algorithm>
 
 wxBEGIN_EVENT_TABLE(TTTFrame, wxFrame)
 EVT_MENU(wxID_EXIT, TTTFrame::OnExit)
+EVT_MENU(TTTFrame::ID_RESET, TTTFrame::OnReset)
 wxEND_EVENT_TABLE()
 
 TTTFrame::TTTFrame(const wxString& title)
 : wxFrame(NULL, -1, title, wxDefaultPosition, wxSize(300, 325))
 {
-	wxPanel *panel = new wxPanel(this, -1);
+	panel = new wxPanel(this, -1);
 	wxBoxSizer *vbox = new wxBoxSizer(wxVERTICAL);
 	wxGridSizer *gridBox = new wxGridSizer(3, 3, 2, 2);
 
@@ -27,7 +29,7 @@ TTTFrame::TTTFrame(const wxString& title)
 	for (int row = 0; row < 3; ++row) {
 		for (int column = 0; column < 3; ++column)
 		{
-			drawPanel(row, column) = new BasicDrawPanel(panel, &t, i++);
+			drawPanel(row, column) = new BasicDrawPanel(panel, t, i++);
 		}
 	}
 
@@ -58,6 +60,7 @@ TTTFrame::TTTFrame(const wxString& title)
 	menubar = new wxMenuBar;
 	file = new wxMenu;
 
+	file->Append(ID_RESET, wxT("&Reset"));
 	file->Append(wxID_EXIT, wxT("&Exit"));
 	menubar->Append(file, wxT("&File"));
 
@@ -68,3 +71,15 @@ void TTTFrame::OnExit(wxCommandEvent& event)
 {
 	Close(true);
 }
+
+void TTTFrame::OnReset(wxCommandEvent& event)
+{
+	t = SuperTTT();
+	for (auto p : drawPanel) {
+		p->resetClick();
+		p->paintNow();
+	};
+
+	topBar->SetLabel(wxT("New Game"));
+}
+

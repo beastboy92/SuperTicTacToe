@@ -18,12 +18,16 @@ public:
 	//wxStaticText *BottomBar;
 private:
 	void OnExit(wxCommandEvent& event);
+	void OnReset(wxCommandEvent& event);
+	void mouseReleased(wxMouseEvent& event);
 	matrix<BasicDrawPanel*, 3, 3> drawPanel;
 	SuperTTT t;
 
+	wxPanel *panel;
 	wxMenuBar *menubar;
 	wxMenu *file;
 	
+	static const int ID_RESET = 1;
 
 	//void OnTextEnter(wxCommandEvent& event);
 

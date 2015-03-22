@@ -19,9 +19,14 @@ EVT_LEFT_DOWN(BasicDrawPanel::mouseDown)
 EVT_LEFT_UP(BasicDrawPanel::mouseReleased)
 wxEND_EVENT_TABLE()
 
-BasicDrawPanel::BasicDrawPanel(wxPanel* parent, SuperTTT* t, int panel) :
+BasicDrawPanel::BasicDrawPanel(wxPanel* parent, SuperTTT& t, int panel) :
 wxPanel(parent, -1, wxDefaultPosition, wxSize(80, 80)), cross(false), click(false), t(t), panel(panel)
 {
+}
+
+void BasicDrawPanel::resetClick()
+{
+	click = false;
 }
 
 void BasicDrawPanel::paintEvent(wxPaintEvent & evt)
@@ -40,20 +45,21 @@ void BasicDrawPanel::mouseDown(wxMouseEvent& event)
 {
 	int row = panel / 3;
 	int column = panel % 3;
-	if (!(t->isAWin(SuperTTT::COMPUTER) || t->isAWin(SuperTTT::HUMAN))){
-		if (t->giveLastPlayer() == SuperTTT::HUMAN){
-			if (t->playMove(SuperTTT::COMPUTER, row, column)){
+	if (!(t.isAWin(SuperTTT::COMPUTER) || t.isAWin(SuperTTT::HUMAN))){
+		if (t.giveLastPlayer() == SuperTTT::HUMAN){
+			if (t.playMove(SuperTTT::COMPUTER, row, column)){
 				click = true;
 				cross = true;
 				paintNow();
-				t->setLastPlayer(SuperTTT::COMPUTER);
+				t.setLastPlayer(SuperTTT::COMPUTER);
 			}
 		}
-		else if (t->giveLastPlayer() == SuperTTT::COMPUTER){
-			if (t->playMove(SuperTTT::HUMAN, row, column)){
+		else if (t.giveLastPlayer() == SuperTTT::COMPUTER){
+			if (t.playMove(SuperTTT::HUMAN, row, column)){
 				click = true;
+				cross = false;
 				paintNow();
-				t->setLastPlayer(SuperTTT::HUMAN);
+				t.setLastPlayer(SuperTTT::HUMAN);
 			}
 		}
 	}	
@@ -62,13 +68,13 @@ void BasicDrawPanel::mouseDown(wxMouseEvent& event)
 void BasicDrawPanel::mouseReleased(wxMouseEvent& event){
 	TTTFrame *frame = static_cast < TTTFrame *>(this->GetParent()->GetParent());
 
-	if (t->isAWin(SuperTTT::COMPUTER)) {
+	if (t.isAWin(SuperTTT::COMPUTER)) {
 		frame->topBar->SetLabel(wxT("Computer wins!!"));
 	}
-	else if (t->isAWin(SuperTTT::HUMAN)) {
+	else if (t.isAWin(SuperTTT::HUMAN)) {
 		frame->topBar->SetLabel(wxT("Human wins!!"));
 	}
-	else if (t->boardIsFull()) {
+	else if (t.boardIsFull()) {
 		frame->topBar->SetLabel(wxT("Draw!!"));
 	}
 }
@@ -96,7 +102,7 @@ void BasicDrawPanel::render(wxDC&  dc)
 
 	DoGetClientSize(&width, &heigth);
 
-	dc.SetBrush(*wxTRANSPARENT_BRUSH);
+	dc.SetBrush(*wxLIGHT_GREY_BRUSH);
 	//dc.SetBrush(*wxRED_BRUSH);
 	dc.DrawRectangle(0, 0, width, width);
 

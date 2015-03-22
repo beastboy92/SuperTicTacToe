@@ -7,12 +7,13 @@ class BasicDrawPanel : public wxPanel
 {
 
 public:
-	BasicDrawPanel(wxPanel* parent, SuperTTT* t, int panel);
+	BasicDrawPanel(wxPanel* parent, SuperTTT& t, int panel);
 
 	void paintEvent(wxPaintEvent & evt);
 	void mouseDown(wxMouseEvent& event);
 	void mouseReleased(wxMouseEvent& event);
 	void paintNow();
+	void resetClick();
 
 	void render(wxDC& dc);
 
@@ -32,7 +33,7 @@ private:
 	bool cross;
 	bool click;
 	int panel;
-	SuperTTT* t;
+	SuperTTT& t;
 
 	wxDECLARE_EVENT_TABLE();
 };
