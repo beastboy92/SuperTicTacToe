@@ -7,7 +7,7 @@ EVT_MENU(TTTFrame::ID_RESET, TTTFrame::OnReset)
 wxEND_EVENT_TABLE()
 
 TTTFrame::TTTFrame(const wxString& title)
-: wxFrame(NULL, -1, title, wxDefaultPosition, wxSize(300, 325))
+: wxFrame(NULL, -1, title, wxDefaultPosition, wxSize(400,425))
 {
 	panel = new wxPanel(this, -1);
 	wxBoxSizer *vbox = new wxBoxSizer(wxVERTICAL);
@@ -54,17 +54,20 @@ TTTFrame::TTTFrame(const wxString& title)
 	}
 	panel->SetSizer(vbox);
 
-	SetMinSize(wxSize(300, 325));
-	SetMaxSize(wxSize(300, 325));
-
+	/*SetMinSize(wxSize(300, 325));
+	SetMaxSize(wxSize(300, 325));*/
+	
 	menubar = new wxMenuBar;
 	file = new wxMenu;
 
-	file->Append(ID_RESET, wxT("&Reset"));
+	file->Append(ID_RESET, wxT("&Reset\tAlt+R"));
 	file->Append(wxID_EXIT, wxT("&Exit"));
 	menubar->Append(file, wxT("&File"));
 
 	SetMenuBar(menubar);
+	wxSize size = panel->GetSize();
+	SetInitialSize(size);
+	SetMaxSize(size);
 }
 
 void TTTFrame::OnExit(wxCommandEvent& event)
