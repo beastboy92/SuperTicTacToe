@@ -27,7 +27,7 @@ bool SuperTTT::playMove(Side s, int board, int row, int column) {
 	boards[board](row, column) = s;
 	prow = row;
 	pcolumn = column;
-	cout << "Next board: " << (column + 1) + (row * 3) << endl;
+	//cout << "Next board: " << (column + 1) + (row * 3) << endl;
 	return true;
 }
 
@@ -52,7 +52,7 @@ void SuperTTT::checkWins(Side s){
 	for (int i = 1; i <= 9; i++){
 		if (isAWin(s, i)){
 			boards[0]((i - 1) / 3, (i - 1) % 3) = s;
-			cout << "player " << s << " board " << i << endl;
+			//cout << "player " << s << " board " << i << endl;
 		}
 	}
 }

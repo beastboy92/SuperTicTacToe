@@ -43,39 +43,54 @@ void BasicDrawPanel::paintNow()
 
 void BasicDrawPanel::mouseDown(wxMouseEvent& event)
 {
-	int row = panel / 3;
-	int column = panel % 3;
-	if (!(t.isAWin(SuperTTT::COMPUTER) || t.isAWin(SuperTTT::HUMAN))){
+	int board = panel / 9;
+	int rest = panel % 9;
+	int row = rest / 3;
+	int column = rest % 3;
+
+	TTTFrame *frame = static_cast < TTTFrame *>(this->GetParent()->GetParent());
+	std::string tmp;
+	tmp = "Next board: ";
+	tmp.append(std::to_string((column + 1) + (row * 3)));
+
+	if (!(t.isAWin(SuperTTT::COMPUTER, board) || t.isAWin(SuperTTT::HUMAN, board) || t.isAWin(SuperTTT::COMPUTER, 0) || t.isAWin(SuperTTT::HUMAN, 0))){
 		if (t.giveLastPlayer() == SuperTTT::HUMAN){
-			if (t.playMove(SuperTTT::COMPUTER, row, column)){
+			if (t.playMove(SuperTTT::COMPUTER, board, row, column)){
 				click = true;
 				cross = true;
 				paintNow();
 				t.setLastPlayer(SuperTTT::COMPUTER);
+				t.checkWins(SuperTTT::COMPUTER);
+				frame->SetTopBar(tmp);
 			}
 		}
 		else if (t.giveLastPlayer() == SuperTTT::COMPUTER){
-			if (t.playMove(SuperTTT::HUMAN, row, column)){
+			if (t.playMove(SuperTTT::HUMAN, board, row, column)){
 				click = true;
 				cross = false;
 				paintNow();
 				t.setLastPlayer(SuperTTT::HUMAN);
+				t.checkWins(SuperTTT::HUMAN);
+				frame->SetTopBar(tmp);
 			}
 		}
-	}	
+	}
 }
 
 void BasicDrawPanel::mouseReleased(wxMouseEvent& event){
 	TTTFrame *frame = static_cast < TTTFrame *>(this->GetParent()->GetParent());
 
-	if (t.isAWin(SuperTTT::COMPUTER)) {
-		frame->topBar->SetLabel(wxT("Computer wins!!"));
+	if (t.isAWin(SuperTTT::COMPUTER, 0)) {
+		frame->SetTopBar("Computer wins!!");
+		//frame->topBar->SetLabel(wxT("Computer wins!!"));
 	}
-	else if (t.isAWin(SuperTTT::HUMAN)) {
-		frame->topBar->SetLabel(wxT("Human wins!!"));
+	else if (t.isAWin(SuperTTT::HUMAN, 0)) {
+		frame->SetTopBar("Human wins!!");
+		//frame->topBar->SetLabel(wxT("Human wins!!"));
 	}
 	else if (t.boardIsFull()) {
-		frame->topBar->SetLabel(wxT("Draw!!"));
+		frame->SetTopBar("Draw!!");
+		//frame->topBar->SetLabel(wxT("Draw!!"));
 	}
 }
 
