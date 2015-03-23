@@ -17,6 +17,7 @@ void ConsoleTTTGame::askMove(SuperTTT::Side side){
 		cout << endl << "Enter board, column and row (starts at 0): ";
 		cin >> board >> column >> row;
 	} while (!t.playMove(side, board, row, column));
+	t.checkWins(side);
 	cout << endl;
 }
 
@@ -28,10 +29,10 @@ void ConsoleTTTGame::play() {
 		}
 	} while (t.isUndecided());
 	printBoard();
-	if (t.isAWin(SuperTTT::COMPUTER)) {
+	if (t.isAWin(SuperTTT::COMPUTER, 0)) {
 		cout << "Computer wins!!" << endl;
 	}
-	else if (t.isAWin(SuperTTT::HUMAN)) {
+	else if (t.isAWin(SuperTTT::HUMAN, 0)) {
 		cout << "Human wins!!" << endl;
 	}
 	else {

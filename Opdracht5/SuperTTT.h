@@ -18,8 +18,11 @@ public:
 	bool isUndecided() const;
 	bool playMove(Side s, int board, int row, int column);
 	bool boardIsFull() const;
-	bool isAWin(Side s) const;
+	bool checkFalseBoardMove(int b);
+	void checkWins(Side s);
+	bool isAWin(Side s, int b) const;
 private:
+	int prow, pcolumn;
 	typedef matrix<Side, 3, 3> Board;
 	std::array<Board, 10> boards;
 	Value value() const;
