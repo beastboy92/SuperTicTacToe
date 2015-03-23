@@ -21,9 +21,13 @@ public:
 	bool checkFalseBoardMove(int b);
 	void checkWins(Side s);
 	bool isAWin(Side s, int b) const;
+	Side giveLastPlayer() const;
+	void setLastPlayer(Side s);
 private:
 	int prow, pcolumn;
 	typedef matrix<Side, 3, 3> Board;
+	Board board;
 	std::array<Board, 10> boards;
 	Value value() const;
+	Side lastPlayer;
 };

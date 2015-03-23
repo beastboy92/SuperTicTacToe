@@ -3,11 +3,11 @@
 using namespace std;
 
 ConsoleTTTGame::ConsoleTTTGame(bool computerGoesFirst) :
-	computerSymbol(computerGoesFirst ? 'x' : 'o'), humanSymbol(computerGoesFirst ? 'o' : 'x') {
-		if (computerGoesFirst) {
-			askMove(SuperTTT::COMPUTER);
-			cout << endl;
-		}
+computerSymbol(computerGoesFirst ? 'x' : 'o'), humanSymbol(computerGoesFirst ? 'o' : 'x') {
+	if (computerGoesFirst) {
+		askMove(SuperTTT::COMPUTER);
+		cout << endl;
+	}
 }
 
 void ConsoleTTTGame::askMove(SuperTTT::Side side){
@@ -67,9 +67,9 @@ void ConsoleTTTGame::printBoard() const {
 		else if (row < 6){
 			for (int board = 4; board <= 6; board++){
 				for (int column = 0; column < 3; column++){
-					if (t.side(row-3, column, board) == SuperTTT::COMPUTER)
+					if (t.side(row - 3, column, board) == SuperTTT::COMPUTER)
 						cout << computerSymbol;
-					else if (t.side(row-3, column, board) == SuperTTT::HUMAN)
+					else if (t.side(row - 3, column, board) == SuperTTT::HUMAN)
 						cout << humanSymbol;
 					else
 						cout << ' ';
@@ -82,9 +82,9 @@ void ConsoleTTTGame::printBoard() const {
 		else {
 			for (int board = 7; board <= 9; board++){
 				for (int column = 0; column < 3; column++){
-					if (t.side(row-6, column, board) == SuperTTT::COMPUTER)
+					if (t.side(row - 6, column, board) == SuperTTT::COMPUTER)
 						cout << computerSymbol;
-					else if (t.side(row-6, column, board) == SuperTTT::HUMAN)
+					else if (t.side(row - 6, column, board) == SuperTTT::HUMAN)
 						cout << humanSymbol;
 					else
 						cout << ' ';
@@ -98,13 +98,13 @@ void ConsoleTTTGame::printBoard() const {
 	cout << streepkort << endl;
 	for (int row = 0; row < 3; ++row) {
 		for (int column = 0; column < 3; ++column)
-		if (t.side(row, column, 0) == SuperTTT::COMPUTER)
-			cout << computerSymbol;
-		else if (t.side(row, column, 0) == SuperTTT::HUMAN)
-			cout << humanSymbol;
-		else
-			cout << ' ';
-		cout << endl;
+			if (t.side(row, column, 0) == SuperTTT::COMPUTER)
+				cout << computerSymbol;
+			else if (t.side(row, column, 0) == SuperTTT::HUMAN)
+				cout << humanSymbol;
+			else
+				cout << ' ';
+			cout << endl;
 	}
 	cout << streepkort << endl;
 }

@@ -2,7 +2,7 @@
 
 using namespace std;
 
-SuperTTT::SuperTTT(): prow (-1), pcolumn(-1){
+SuperTTT::SuperTTT() : prow(-1), pcolumn(-1), lastPlayer(SuperTTT::COMPUTER){
 	for_each(boards.begin(), boards.end(), [](Board& board){
 		fill(board.begin(), board.end(), EMPTY);
 	});
@@ -15,6 +15,7 @@ SuperTTT::Value SuperTTT::value() const {
 SuperTTT::Side SuperTTT::side(int row, int column, int board) const {
 	return boards[board](row, column);
 }
+
 
 bool SuperTTT::isUndecided() const {
 	return value() == UNDECIDED;
@@ -65,4 +66,12 @@ bool SuperTTT::isAWin(Side s, int b) const {
 	}
 	return (boards[b](0, 0) == s && boards[b](1, 1) == s && boards[b](2, 2) == s) ||
 		(boards[b](0, 2) == s && boards[b](1, 1) == s && boards[b](2, 0) == s);
+}
+
+SuperTTT::Side SuperTTT::giveLastPlayer() const{
+	return lastPlayer;
+}
+
+void SuperTTT::setLastPlayer(SuperTTT::Side s){
+	lastPlayer = s;
 }
