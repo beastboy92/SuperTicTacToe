@@ -7,7 +7,7 @@ EVT_MENU(TTTFrame::ID_RESET, TTTFrame::OnReset)
 wxEND_EVENT_TABLE()
 
 TTTFrame::TTTFrame(const wxString& title)
-: wxFrame(NULL, -1, title, wxDefaultPosition, wxSize(900,925))
+: wxFrame(NULL, -1, title, wxDefaultPosition, wxGetDisplaySize())//wxSize(900,925))
 {
 	panel = new wxPanel(this, -1);
 	wxBoxSizer *vbox = new wxBoxSizer(wxVERTICAL);
@@ -25,13 +25,18 @@ TTTFrame::TTTFrame(const wxString& title)
 	BasicDrawPanel *drawPanel8 = new BasicDrawPanel(panel, false);
 	BasicDrawPanel *drawPanel9 = new BasicDrawPanel(panel, true);*/
 
+	
+	wxSize size = wxGetDisplaySize();
+	int sizeY = size.GetY();
+	sizeY = (sizeY - 200 - 30 - 12)/9;
+	
 	int i = 0;
 	for (int board = 0; board < 10; ++board)
 	{
 		for (int row = 0; row < 3; ++row) {
 			for (int column = 0; column < 3; ++column)
 			{
-				drawPanels[board](row, column) = new BasicDrawPanel(panel, t, i++);
+				drawPanels[board](row, column) = new BasicDrawPanel(panel, t, i++, sizeY);
 			}
 		}
 	}
@@ -79,7 +84,9 @@ TTTFrame::TTTFrame(const wxString& title)
 	menubar->Append(file, wxT("&File"));
 
 	SetMenuBar(menubar);
-	wxSize size = panel->GetSize();
+	size = playField[0]->GetSize();
+	size.Set(size.GetWidth() + 50, size.GetHeight() + 90);
+	//size = panel->GetSize();
 	SetInitialSize(size);
 	SetMaxSize(size);
 }

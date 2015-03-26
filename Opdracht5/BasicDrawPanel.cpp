@@ -19,8 +19,8 @@ EVT_LEFT_DOWN(BasicDrawPanel::mouseDown)
 EVT_LEFT_UP(BasicDrawPanel::mouseReleased)
 wxEND_EVENT_TABLE()
 
-BasicDrawPanel::BasicDrawPanel(wxPanel* parent, SuperTTT& t, int panel) :
-wxPanel(parent, -1, wxDefaultPosition, wxSize(80, 80)), cross(false), click(false), t(t), panel(panel)
+BasicDrawPanel::BasicDrawPanel(wxPanel* parent, SuperTTT& t, int panel, int size) :
+wxPanel(parent, -1, wxDefaultPosition, wxSize(size, size)), cross(false), click(false), t(t), panel(panel)
 {
 }
 
@@ -114,6 +114,7 @@ void BasicDrawPanel::render(wxDC&  dc)
 	dc.DrawLine(300, 100, 700, 300); // draw line across the rectangle*/
 
 	int width, heigth;
+
 
 	DoGetClientSize(&width, &heigth);
 

@@ -7,7 +7,7 @@ class BasicDrawPanel : public wxPanel
 {
 
 public:
-	BasicDrawPanel(wxPanel* parent, SuperTTT& t, int panel);
+	BasicDrawPanel(wxPanel* parent, SuperTTT& t, int panel, int size);
 
 	void paintEvent(wxPaintEvent & evt);
 	void mouseDown(wxMouseEvent& event);
