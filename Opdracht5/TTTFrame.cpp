@@ -28,6 +28,7 @@ TTTFrame::TTTFrame(const wxString& title)
 	
 	wxSize size = wxGetDisplaySize();
 	int sizeY = size.GetY();
+	size = topBar->GetSize();
 	sizeY = (sizeY - 200 - 30 - 12)/9;
 	
 	int i = 0;
@@ -85,7 +86,7 @@ TTTFrame::TTTFrame(const wxString& title)
 
 	SetMenuBar(menubar);
 	size = playField[0]->GetSize();
-	size.Set(size.GetWidth() + 50, size.GetHeight() + 90);
+	size.Set(size.GetWidth() + 50, size.GetHeight() + 3*topBar->GetSize().GetHeight() + 45);
 	//size = panel->GetSize();
 	SetInitialSize(size);
 	SetMaxSize(size);
