@@ -4,6 +4,7 @@
 wxBEGIN_EVENT_TABLE(TTTFrame, wxFrame)
 EVT_MENU(wxID_EXIT, TTTFrame::OnExit)
 EVT_MENU(TTTFrame::ID_RESET, TTTFrame::OnReset)
+EVT_MENU(TTTFrame::ID_PvP, TTTFrame::OnPvP)
 wxEND_EVENT_TABLE()
 
 TTTFrame::TTTFrame(const wxString& title, bool computerFirst)
@@ -80,10 +81,15 @@ TTTFrame::TTTFrame(const wxString& title, bool computerFirst)
 	
 	menubar = new wxMenuBar;
 	file = new wxMenu;
+	settings = new wxMenu;
 
 	file->Append(ID_RESET, wxT("&Reset\tAlt+R"));
 	file->Append(wxID_EXIT, wxT("&Exit"));
 	menubar->Append(file, wxT("&File"));
+
+	settings->Append(ID_PvP, wxT("&PvP"), wxT("Player vs Player"), true);
+	PvP = false;
+	menubar->Append(settings, wxT("&Settings"));
 
 	SetMenuBar(menubar);
 	size = playField[0]->GetSize();
@@ -102,6 +108,10 @@ void TTTFrame::doComputerMove(){
 		t.checkWins(SuperTTT::COMPUTER);*/
 		drawPanels[bestBoard](bestRow, bestColumn)->computerMove();
 	}
+}
+
+bool TTTFrame::GivePvP(){
+	return PvP;
 }
 
 void TTTFrame::SetTopBar(std::string message){
@@ -132,8 +142,13 @@ void TTTFrame::OnReset(wxCommandEvent& event)
 	});
 
 	topBar->SetLabel(wxT("New Game"));
-	if (computerFirst){
+	if (computerFirst && ! PvP){
 		doComputerMove();
 	}
+}
+
+void TTTFrame::OnPvP(wxCommandEvent& event)
+{
+	PvP = !PvP;
 }
 

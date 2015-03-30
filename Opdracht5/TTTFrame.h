@@ -13,6 +13,7 @@ public:
 	TTTFrame(const wxString& title, bool computerFirst);
 	void SetTopBar(std::string message);
 	void doComputerMove();
+	bool GivePvP();
 
 	//wxMenu *edit;
 	//wxMenu *help;
@@ -21,6 +22,7 @@ public:
 private:
 	void OnExit(wxCommandEvent& event);
 	void OnReset(wxCommandEvent& event);
+	void OnPvP(wxCommandEvent& event);
 	//void mouseReleased(wxMouseEvent& event);
 	typedef matrix<BasicDrawPanel*, 3, 3> DrawPanel;
 	//DrawPanel drawPanel;
@@ -32,11 +34,14 @@ private:
 	wxPanel *panel;
 	wxMenuBar *menubar;
 	wxMenu *file;
+	wxMenu *settings;
 	wxStaticText *topBar;
 	
 	static const int ID_RESET = 1;
+	static const int ID_PvP = 2;
 
 	bool computerFirst;
+	bool PvP;
 
 	//void OnTextEnter(wxCommandEvent& event);
 
