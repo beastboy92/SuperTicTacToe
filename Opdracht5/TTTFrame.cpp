@@ -6,9 +6,10 @@ EVT_MENU(wxID_EXIT, TTTFrame::OnExit)
 EVT_MENU(TTTFrame::ID_RESET, TTTFrame::OnReset)
 wxEND_EVENT_TABLE()
 
-TTTFrame::TTTFrame(const wxString& title)
-: wxFrame(NULL, -1, title, wxDefaultPosition, wxGetDisplaySize())//wxSize(900,925))
+TTTFrame::TTTFrame(const wxString& title, bool computerFirst)
+: wxFrame(NULL, -1, title, wxDefaultPosition, wxGetDisplaySize()), computerFirst(computerFirst)
 {
+	t = SuperTTT(computerFirst ? SuperTTT::HUMAN : SuperTTT::COMPUTER);
 	panel = new wxPanel(this, -1);
 	wxBoxSizer *vbox = new wxBoxSizer(wxVERTICAL);
 	//wxGridSizer *gridBox = new wxGridSizer(3, 3, 2, 2);
@@ -103,7 +104,8 @@ void TTTFrame::OnExit(wxCommandEvent& event)
 
 void TTTFrame::OnReset(wxCommandEvent& event)
 {
-	t = SuperTTT();
+	computerFirst = !computerFirst;
+	t = SuperTTT(SuperTTT(computerFirst ? SuperTTT::HUMAN : SuperTTT::COMPUTER));
 	/*for (auto panel : drawPanels) {
 		for (auto p : panel){
 			p->resetClick();

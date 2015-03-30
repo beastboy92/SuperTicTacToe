@@ -29,7 +29,7 @@ IMPLEMENT_APP(TTTApp)
 bool TTTApp::OnInit()
 {
 
-	TTTFrame *tttFrame = new TTTFrame(wxT("Tic Tac Toe"));
+	TTTFrame *tttFrame = new TTTFrame(wxT("Tic Tac Toe"), false);
 	tttFrame->Show(true);
 
 	return true;

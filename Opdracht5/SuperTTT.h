@@ -9,10 +9,10 @@
 
 class SuperTTT{
 public:
-	SuperTTT();
-
 	enum Side { EMPTY, HUMAN, COMPUTER };
 	enum Value { HUMAN_WINS = -1, DRAW, COMPUTER_WINS, UNDECIDED };
+
+	SuperTTT(Side s = SuperTTT::COMPUTER);
 
 	Side side(int row, int column, int board) const;
 	bool isUndecided() const;

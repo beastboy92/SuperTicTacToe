@@ -10,7 +10,7 @@
 class TTTFrame : public wxFrame
 {
 public:
-	TTTFrame(const wxString& title);
+	TTTFrame(const wxString& title, bool computerFirst);
 	void SetTopBar(std::string message);
 
 	//wxMenu *edit;
@@ -34,6 +34,8 @@ private:
 	wxStaticText *topBar;
 	
 	static const int ID_RESET = 1;
+
+	bool computerFirst;
 
 	//void OnTextEnter(wxCommandEvent& event);
 
