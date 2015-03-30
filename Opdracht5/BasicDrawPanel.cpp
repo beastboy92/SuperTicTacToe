@@ -53,8 +53,8 @@ void BasicDrawPanel::mouseDown(wxMouseEvent& event)
 	tmp = "Next board: ";
 	tmp.append(std::to_string((column + 1) + (row * 3)));
 
-	if (!(t.isAWin(SuperTTT::COMPUTER, board) || t.isAWin(SuperTTT::HUMAN, board) || t.isAWin(SuperTTT::COMPUTER, 0) || t.isAWin(SuperTTT::HUMAN, 0))){
-		if (t.giveLastPlayer() == SuperTTT::HUMAN){
+	if (t.isUndecided()){
+		/*if (t.giveLastPlayer() == SuperTTT::HUMAN){
 			if (t.playMove(SuperTTT::COMPUTER, board, row, column)){
 				click = true;
 				cross = true;
@@ -73,12 +73,45 @@ void BasicDrawPanel::mouseDown(wxMouseEvent& event)
 				t.checkWins(SuperTTT::HUMAN);
 				frame->SetTopBar(tmp);
 			}
+		}*/
+		if (t.playMove(SuperTTT::HUMAN, board, row, column)){
+			click = true;
+			cross = false;
+			paintNow();
+			t.setLastPlayer(SuperTTT::HUMAN);
+			t.checkWins(SuperTTT::HUMAN);
+			frame->SetTopBar(tmp);
 		}
+	}
+}
+
+void BasicDrawPanel::computerMove()
+{
+	int board = panel / 9;
+	int rest = panel % 9;
+	int row = rest / 3;
+	int column = rest % 3;
+
+	TTTFrame *frame = static_cast < TTTFrame *>(this->GetParent()->GetParent());
+	std::string tmp;
+	tmp = "Next board: ";
+	tmp.append(std::to_string((column + 1) + (row * 3)));
+
+	if (t.playMove(SuperTTT::COMPUTER, board, row, column)){
+		click = true;
+		cross = true;
+		paintNow();
+		t.setLastPlayer(SuperTTT::COMPUTER);
+		t.checkWins(SuperTTT::COMPUTER);
+		frame->SetTopBar(tmp);
 	}
 }
 
 void BasicDrawPanel::mouseReleased(wxMouseEvent& event){
 	TTTFrame *frame = static_cast < TTTFrame *>(this->GetParent()->GetParent());
+	if (t.giveLastPlayer() == SuperTTT::HUMAN){
+		frame->doComputerMove();
+	}
 
 	if (t.isAWin(SuperTTT::COMPUTER, 0)) {
 		frame->SetTopBar("Computer wins!!");

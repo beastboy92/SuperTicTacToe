@@ -5,7 +5,7 @@ using namespace std;
 ConsoleTTTGame::ConsoleTTTGame(bool computerGoesFirst) :
 computerSymbol(computerGoesFirst ? 'x' : 'o'), humanSymbol(computerGoesFirst ? 'o' : 'x') {
 	if (computerGoesFirst) {
-		askMove(SuperTTT::COMPUTER);
+		doComputerMove();
 		cout << endl;
 	}
 }
@@ -21,11 +21,19 @@ void ConsoleTTTGame::askMove(SuperTTT::Side side){
 	cout << endl;
 }
 
+void ConsoleTTTGame::doComputerMove(){
+	int bestRow, bestColumn, bestBoard;
+	t.chooseComputerMove(bestRow, bestColumn, bestBoard);
+	cout << "Computer plays: BOARD = " << bestBoard << " ROW = " << bestRow << " COLUMN = " << bestColumn << endl;
+	t.playMove(SuperTTT::COMPUTER, bestBoard, bestRow, bestColumn);
+	t.checkWins(SuperTTT::COMPUTER);
+}
+
 void ConsoleTTTGame::play() {
 	do {
 		askMove(SuperTTT::HUMAN);
 		if (t.isUndecided()) {
-			askMove(SuperTTT::COMPUTER);
+			doComputerMove();
 		}
 	} while (t.isUndecided());
 	printBoard();

@@ -14,7 +14,7 @@ public:
 	void mouseReleased(wxMouseEvent& event);
 	void paintNow();
 	void resetClick();
-
+	void computerMove();
 	void render(wxDC& dc);
 
 	// some useful events

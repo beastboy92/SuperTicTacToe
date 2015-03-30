@@ -93,6 +93,17 @@ TTTFrame::TTTFrame(const wxString& title, bool computerFirst)
 	SetMaxSize(size);
 }
 
+void TTTFrame::doComputerMove(){
+	if (t.isUndecided()){
+		int bestRow, bestColumn, bestBoard;
+		t.chooseComputerMove(bestRow, bestColumn, bestBoard);
+		//cout << "Computer plays: BOARD = " << bestBoard << " ROW = " << bestRow << " COLUMN = " << bestColumn << endl;
+		/*t.playMove(SuperTTT::COMPUTER, bestBoard, bestRow, bestColumn);
+		t.checkWins(SuperTTT::COMPUTER);*/
+		drawPanels[bestBoard](bestRow, bestColumn)->computerMove();
+	}
+}
+
 void TTTFrame::SetTopBar(std::string message){
 	topBar->SetLabel(message);
 }
@@ -121,5 +132,8 @@ void TTTFrame::OnReset(wxCommandEvent& event)
 	});
 
 	topBar->SetLabel(wxT("New Game"));
+	if (computerFirst){
+		doComputerMove();
+	}
 }
 
