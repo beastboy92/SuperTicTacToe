@@ -2,19 +2,96 @@
 
 using namespace std;
 
-SuperTTT::SuperTTT(): prow (-1), pcolumn(-1){
+SuperTTT::Value SuperTTT::chooseComputerMove(int& bestRow, int& bestColumn, int& bestBoard, Value alpha, Value beta, int depth) {
+	Value bestValue = value();
+	if (depth < MAX_DEPTH){
+		++movesConsidered;
+		if (bestValue == UNDECIDED) {
+			for (int board = 1; board < 10; ++board){
+				if (!checkFalseBoardMove(board) && !isAWin(HUMAN, board) && !isAWin(COMPUTER, board)){
+					for (int row = 0; alpha < beta && row < 3; ++row) {
+						for (int column = 0; alpha < beta && column < 3; ++column) {
+							if (boards[board](row, column) == EMPTY) {
+								boards[board](row, column) = COMPUTER;
+								int dummyRow, dummyColumn, dummyBoard;
+								Value value = chooseHumanMove(dummyRow, dummyColumn, dummyBoard, alpha, beta, depth+1);
+								boards[board](row, column) = EMPTY;
+								if (value > alpha) {
+									alpha = value;
+									bestRow = row;
+									bestColumn = column;
+									bestBoard = board;
+								}
+							}
+						}
+					}
+				}
+			}
+			bestValue = alpha;
+		}
+	}
+	return bestValue;
+}
+
+SuperTTT::Value SuperTTT::chooseHumanMove(int& bestRow, int& bestColumn, int& bestBoard, Value alpha, Value beta, int depth) {
+	Value bestValue = value();
+	if (depth < MAX_DEPTH){
+		++movesConsidered;
+		if (bestValue == UNDECIDED) {
+			for (int board = 1; board < 10; ++board){
+				if (!checkFalseBoardMove(board) && !isAWin(HUMAN, board) && !isAWin(COMPUTER, board)){
+					for (int row = 0; beta > alpha && row < 3; ++row) {
+						for (int column = 0; beta > alpha && column < 3; ++column) {
+							if (boards[board](row, column) == EMPTY) {
+								boards[board](row, column) = HUMAN;
+								int dummyRow, dummyColumn, dummyBoard;
+								Value value = chooseComputerMove(dummyRow, dummyColumn, dummyBoard, alpha, beta, depth+1);
+								boards[board](row, column) = EMPTY;
+								if (value < beta) {
+									beta = value;
+									bestRow = row;
+									bestColumn = column;
+									bestBoard = board;
+								}
+							}
+						}
+					}
+				}
+			}
+			bestValue = beta;
+		}
+		cout << movesConsidered << endl;
+	}
+	return bestValue;
+}
+
+SuperTTT::SuperTTT(Side s) : prow(-1), pcolumn(-1), lastPlayer(s){
 	for_each(boards.begin(), boards.end(), [](Board& board){
 		fill(board.begin(), board.end(), EMPTY);
 	});
 }
 
 SuperTTT::Value SuperTTT::value() const {
+	for (int board = 1; board < 10; ++board){
+		int humanCount = 0;
+		int computerCount = 0;
+		for_each(boards[board].cbegin(), boards[board].cend(), [&](Side& s){
+			if (s == HUMAN){
+				humanCount++;
+			}
+			else if (s == COMPUTER){
+				computerCount++;
+			}
+		});
+
+	}
 	return isAWin(COMPUTER, 0) ? COMPUTER_WINS : isAWin(HUMAN, 0) ? HUMAN_WINS : boardIsFull() ? DRAW : UNDECIDED;
 }
 
 SuperTTT::Side SuperTTT::side(int row, int column, int board) const {
 	return boards[board](row, column);
 }
+
 
 bool SuperTTT::isUndecided() const {
 	return value() == UNDECIDED;
@@ -51,7 +128,7 @@ void SuperTTT::checkWins(Side s){
 	for (int i = 1; i <= 9; i++){
 		if (isAWin(s, i)){
 			boards[0]((i - 1) / 3, (i - 1) % 3) = s;
-			cout << "player " << s << " board " << i << endl;
+			//cout << "player " << s << " board " << i << endl;
 		}
 	}
 }
@@ -65,4 +142,12 @@ bool SuperTTT::isAWin(Side s, int b) const {
 	}
 	return (boards[b](0, 0) == s && boards[b](1, 1) == s && boards[b](2, 2) == s) ||
 		(boards[b](0, 2) == s && boards[b](1, 1) == s && boards[b](2, 0) == s);
+}
+
+SuperTTT::Side SuperTTT::giveLastPlayer() const{
+	return lastPlayer;
+}
+
+void SuperTTT::setLastPlayer(SuperTTT::Side s){
+	lastPlayer = s;
 }

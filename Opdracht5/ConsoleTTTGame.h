@@ -6,6 +6,8 @@ class ConsoleTTTGame {
 public:
 	explicit ConsoleTTTGame(bool computerGoesFirst);
 	void askMove(SuperTTT::Side side);
+
+	void doComputerMove();
 	void play();
 private:
 	void printBoard() const;
