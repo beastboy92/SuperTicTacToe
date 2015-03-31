@@ -102,6 +102,8 @@ TTTFrame::TTTFrame(const wxString& title, bool computerFirst)
 void TTTFrame::doComputerMove(){
 	if (t.isUndecided()){
 		int bestRow, bestColumn, bestBoard;
+		bestBoard = t.giveNextBoard();
+		t.giveRandomBoardWhenWon(bestBoard); // prevent computer to set on board that is won
 		t.chooseComputerMove(bestRow, bestColumn, bestBoard);
 		//cout << "Computer plays: BOARD = " << bestBoard << " ROW = " << bestRow << " COLUMN = " << bestColumn << endl;
 		/*t.playMove(SuperTTT::COMPUTER, bestBoard, bestRow, bestColumn);
