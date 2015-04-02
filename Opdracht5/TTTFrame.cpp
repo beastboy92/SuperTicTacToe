@@ -101,9 +101,14 @@ TTTFrame::TTTFrame(const wxString& title, bool computerFirst)
 
 void TTTFrame::doComputerMove(){
 	if (t.isUndecided()){
+		int y = topBar->GetSize().GetHeight();
+		int x = panel->GetSize().GetWidth() - 50;
+		topBar->SetSize(x, y);
+		topBar->SetLabel(wxT("Computer is deciding move"));
 		int bestRow, bestColumn, bestBoard;
 		bestBoard = t.giveNextBoard();
-		t.giveRandomBoardWhenWon(bestBoard); // prevent computer to set on board that is won
+		//t.giveRandomBoardWhenWon(bestBoard); // prevent computer to set on board that is won
+		t.giveBestBoardWhenWon(bestBoard, SuperTTT::COMPUTER); // prevent computer to set on board that is won and give best board to set next move
 		t.chooseComputerMove(bestRow, bestColumn, bestBoard);
 		//cout << "Computer plays: BOARD = " << bestBoard << " ROW = " << bestRow << " COLUMN = " << bestColumn << endl;
 		/*t.playMove(SuperTTT::COMPUTER, bestBoard, bestRow, bestColumn);
@@ -116,7 +121,11 @@ bool TTTFrame::GivePvP(){
 	return PvP;
 }
 
-void TTTFrame::SetTopBar(std::string message){
+//void TTTFrame::SetTopBar(std::string message){
+//	topBar->SetLabel(message);
+//}
+
+void TTTFrame::SetTopBar(const wxString &message){
 	topBar->SetLabel(message);
 }
 

@@ -7,7 +7,7 @@
 #include <array>
 #include "Matrix.h"
 
-const int MAX_DEPTH = 9;
+const int MAX_DEPTH = 8;
 
 class SuperTTT{
 public:
@@ -25,8 +25,9 @@ public:
 	bool isUndecided() const;
 	bool playMove(Side s, int board, int row, int column);
 	bool boardIsFull() const;
-	bool checkFalseBoardMove(int b);
+	bool checkFalseBoardMove(int board);
 	void giveRandomBoardWhenWon(int &b);
+	void giveBestBoardWhenWon(int &board, Side s);
 	int giveNextBoard();
 	void checkWins(Side s);
 	bool isAWin(Side s, int b) const;
@@ -36,7 +37,7 @@ private:
 	int movesConsidered = 0;
 	int prow, pcolumn;
 	typedef matrix<Side, 3, 3> Board;
-	Board board;
+	//Board board;
 	std::array<Board, 10> boards;
 	//Value value(int depth, int board) const;
 	int value(int depth = 0, int board = 0) const;

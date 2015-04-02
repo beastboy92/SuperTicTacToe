@@ -49,9 +49,13 @@ void BasicDrawPanel::mouseDown(wxMouseEvent& event)
 	int column = rest % 3;
 
 	TTTFrame *frame = static_cast < TTTFrame *>(this->GetParent()->GetParent());
-	std::string tmp;
+	/*std::string tmp;
 	tmp = "Next board: ";
-	tmp.append(std::to_string((column + 1) + (row * 3)));
+	tmp.append(std::to_string((column + 1) + (row * 3)));*/
+
+	wxString tmp;
+	tmp = wxT("Next board: ");
+	tmp << (column + 1) + (row * 3);
 
 	if (t.isUndecided()){
 		if (t.giveLastPlayer() == SuperTTT::HUMAN){
@@ -85,9 +89,13 @@ void BasicDrawPanel::computerMove()
 	int column = rest % 3;
 
 	TTTFrame *frame = static_cast < TTTFrame *>(this->GetParent()->GetParent());
-	std::string tmp;
+	/*std::string tmp;
 	tmp = "Next board: ";
-	tmp.append(std::to_string((column + 1) + (row * 3)));
+	tmp.append(std::to_string((column + 1) + (row * 3)));*/
+
+	wxString tmp;
+	tmp = wxT("Next board: ");
+	tmp << (column + 1) + (row * 3);
 
 	if (t.playMove(SuperTTT::COMPUTER, board, row, column)){
 		click = true;
@@ -106,19 +114,19 @@ void BasicDrawPanel::mouseReleased(wxMouseEvent& event){
 	}
 
 	if (t.isAWin(SuperTTT::COMPUTER, 0) && !frame->GivePvP()) {
-		frame->SetTopBar("Computer wins!!");
+		frame->SetTopBar(wxT("Computer wins!!"));
 		//frame->topBar->SetLabel(wxT("Computer wins!!"));
 	}
 	else if (t.isAWin(SuperTTT::COMPUTER, 0) && frame->GivePvP()) {
-		frame->SetTopBar("Player 2 wins!!");
+		frame->SetTopBar(wxT("Player 2 wins!!"));
 		//frame->topBar->SetLabel(wxT("Computer wins!!"));
 	}
 	else if (t.isAWin(SuperTTT::HUMAN, 0)) {
-		frame->SetTopBar("Player wins!!");
+		frame->SetTopBar(wxT("Player wins!!"));
 		//frame->topBar->SetLabel(wxT("Human wins!!"));
 	}
 	else if (t.boardIsFull()) {
-		frame->SetTopBar("Draw!!");
+		frame->SetTopBar(wxT("Draw!!"));
 		//frame->topBar->SetLabel(wxT("Draw!!"));
 	}
 }

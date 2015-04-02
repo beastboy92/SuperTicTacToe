@@ -11,7 +11,8 @@ class TTTFrame : public wxFrame
 {
 public:
 	TTTFrame(const wxString& title, bool computerFirst);
-	void SetTopBar(std::string message);
+	//void SetTopBar(std::string message);
+	void SetTopBar(const wxString &message);
 	void doComputerMove();
 	bool GivePvP();
 
