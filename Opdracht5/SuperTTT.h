@@ -7,7 +7,7 @@
 #include <array>
 #include "Matrix.h"
 
-const int MAX_DEPTH = 8;
+const int MAX_DEPTH = 9;
 
 class SuperTTT{
 public:
@@ -28,7 +28,7 @@ public:
 	bool checkFalseBoardMove(int board);
 	void giveRandomBoardWhenWon(int &b);
 	void giveBestBoardWhenWon(int &board, Side s);
-	int giveNextBoard();
+	int giveNextBoard() const;
 	void checkWins(Side s);
 	bool isAWin(Side s, int b) const;
 	Side giveLastPlayer() const;

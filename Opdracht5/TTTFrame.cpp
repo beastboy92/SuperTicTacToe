@@ -106,9 +106,9 @@ void TTTFrame::doComputerMove(){
 		topBar->SetSize(x, y);
 		topBar->SetLabel(wxT("Computer is deciding move"));
 		int bestRow, bestColumn, bestBoard;
-		bestBoard = t.giveNextBoard();
+		//bestBoard = t.giveNextBoard();
 		//t.giveRandomBoardWhenWon(bestBoard); // prevent computer to set on board that is won
-		t.giveBestBoardWhenWon(bestBoard, SuperTTT::COMPUTER); // prevent computer to set on board that is won and give best board to set next move
+		//t.giveBestBoardWhenWon(bestBoard, SuperTTT::COMPUTER); // prevent computer to set on board that is won and give best board to set next move
 		t.chooseComputerMove(bestRow, bestColumn, bestBoard);
 		//cout << "Computer plays: BOARD = " << bestBoard << " ROW = " << bestRow << " COLUMN = " << bestColumn << endl;
 		/*t.playMove(SuperTTT::COMPUTER, bestBoard, bestRow, bestColumn);
