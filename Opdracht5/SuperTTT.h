@@ -27,8 +27,9 @@ public:
 	bool checkDraw() const;
 	bool boardIsFull(int b) const;
 	bool checkFalseBoardMove(int board);
-	void giveRandomBoardWhenWon(int &b);
-	void giveBestBoardWhenWon(int &board, Side s);
+	// old unused functions
+	//void giveRandomBoardWhenWon(int &b);
+	//void giveBestBoardWhenWon(int &board, Side s);
 	int giveNextBoard() const;
 	void checkWins(Side s);
 	bool isAWin(Side s, int b) const;

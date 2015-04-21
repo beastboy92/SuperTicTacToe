@@ -246,38 +246,39 @@ int SuperTTT::giveNextBoard() const{
 	}	
 }
 
-void SuperTTT::giveRandomBoardWhenWon(int &b){
-	if (isAWin(HUMAN, b) || isAWin(COMPUTER, b))
-	{
-		do{
-			b = (rand() % 9) + 1;
-		} while (isAWin(HUMAN, b) || isAWin(COMPUTER, b));
-	}
-}
-
-void SuperTTT::giveBestBoardWhenWon(int &board, Side s){
-	if (board < 0 || board > 9){
-		board = 0;
-	}
-	if (isAWin(HUMAN, board) || isAWin(COMPUTER, board))
-	{
-		int row, column;
-		board = 0;
-		if (s == COMPUTER)
-		{
-			chooseComputerMove(row, column, board);
-		}
-		else
-		{
-			chooseHumanMove(row, column, board);
-		}
-		if (row < 0 || row >= 3 || column < 0 || column >= 3){
-			cout << "error" << endl;
-		}
-		board = (column + 1) + (row * 3);
-	}
-	//return (board);
-}
+ //old unused functions
+//void SuperTTT::giveRandomBoardWhenWon(int &b){
+//	if (isAWin(HUMAN, b) || isAWin(COMPUTER, b))
+//	{
+//		do{
+//			b = (rand() % 9) + 1;
+//		} while (isAWin(HUMAN, b) || isAWin(COMPUTER, b));
+//	}
+//}
+//
+//void SuperTTT::giveBestBoardWhenWon(int &board, Side s){
+//	if (board < 0 || board > 9){
+//		board = 0;
+//	}
+//	if (isAWin(HUMAN, board) || isAWin(COMPUTER, board))
+//	{
+//		int row, column;
+//		board = 0;
+//		if (s == COMPUTER)
+//		{
+//			chooseComputerMove(row, column, board);
+//		}
+//		else
+//		{
+//			chooseHumanMove(row, column, board);
+//		}
+//		if (row < 0 || row >= 3 || column < 0 || column >= 3){
+//			cout << "error" << endl;
+//		}
+//		board = (column + 1) + (row * 3);
+//	}
+//	//return (board);
+//}
 
 void SuperTTT::checkWins(Side s){
 	for (int i = 1; i <= 9; i++){
