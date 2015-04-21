@@ -12,7 +12,7 @@ const int MAX_DEPTH = 9;
 class SuperTTT{
 public:
 	enum Side { EMPTY, HUMAN, COMPUTER };
-	enum Value { HUMAN_WINS = -2, DRAW = -1, COMPUTER_WINS = 10, UNDECIDED = 11};
+	enum Value { HUMAN_WINS = -52, DRAW = 0, COMPUTER_WINS = 52, UNDECIDED = 53};
 
 	SuperTTT(Side s = SuperTTT::COMPUTER);
 
@@ -40,6 +40,6 @@ private:
 	//Board board;
 	std::array<Board, 10> boards;
 	//Value value(int depth, int board) const;
-	int value(int depth = 0, int board = 0) const;
+	int value(int depth = 0) const;
 	Side lastPlayer;
 };
