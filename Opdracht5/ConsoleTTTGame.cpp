@@ -32,6 +32,7 @@ void ConsoleTTTGame::doComputerMove(){
 void ConsoleTTTGame::play() {
 	do {
 		askMove(SuperTTT::HUMAN);
+		printBoard();
 		if (t.isUndecided()) {
 			doComputerMove();
 		}
