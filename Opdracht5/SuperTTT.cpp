@@ -87,10 +87,10 @@ int SuperTTT::chooseComputerMove(int& bestRow, int& bestColumn, int& bestBoard, 
 		++movesConsidered;
 		if (bestValue == UNDECIDED) {
 			int nextBoard = giveNextBoard();
-			if (boards[0]((nextBoard - 1) / 3, (nextBoard - 1) % 3) != EMPTY) // somebody has won on next board
-			{
-				nextBoard = 1;
-			}
+			//if (boards[0]((nextBoard - 1) / 3, (nextBoard - 1) % 3) != EMPTY) // somebody has won on next board
+			//{
+			//	nextBoard = 1;
+			//}
 			for (int board = nextBoard; board < 10; ++board){
 				//if (!checkFalseBoardMove(board) && !isAWin(HUMAN, board) && !isAWin(COMPUTER, board)){
 				if (!checkFalseBoardMove(board) && boards[0]((board - 1) / 3, (board - 1) % 3) == EMPTY){
@@ -141,10 +141,10 @@ int SuperTTT::chooseHumanMove(int& bestRow, int& bestColumn, int& bestBoard, int
 		++movesConsidered;
 		if (bestValue == UNDECIDED) {
 			int nextBoard = giveNextBoard();
-			if (boards[0]((nextBoard - 1) / 3, (nextBoard - 1) % 3) != EMPTY) // somebody has won on next board
-			{
-				nextBoard = 1;
-			}
+			//if (boards[0]((nextBoard - 1) / 3, (nextBoard - 1) % 3) != EMPTY) // somebody has won on next board
+			//{
+			//	nextBoard = 1;
+			//}
 			for (int board = nextBoard; board < 10; ++board){
 				//if (!checkFalseBoardMove(board) && !isAWin(HUMAN, board) && !isAWin(COMPUTER, board)){
 				if (!checkFalseBoardMove(board) && boards[0]((board - 1) / 3, (board - 1) % 3) == EMPTY){
