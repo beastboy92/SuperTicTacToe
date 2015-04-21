@@ -24,7 +24,8 @@ public:
 	Side side(int row, int column, int board) const;
 	bool isUndecided() const;
 	bool playMove(Side s, int board, int row, int column);
-	bool boardIsFull() const;
+	bool checkDraw() const;
+	bool boardIsFull(int b) const;
 	bool checkFalseBoardMove(int board);
 	void giveRandomBoardWhenWon(int &b);
 	void giveBestBoardWhenWon(int &board, Side s);

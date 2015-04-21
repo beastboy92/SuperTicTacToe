@@ -49,7 +49,7 @@ int SuperTTT::value(int depth) const {
 		}	
 	}
 	else{
-		return isAWin(COMPUTER, 0) ? COMPUTER_WINS : isAWin(HUMAN, 0) ? HUMAN_WINS : boardIsFull() ? DRAW : UNDECIDED;
+		return isAWin(COMPUTER, 0) ? COMPUTER_WINS : isAWin(HUMAN, 0) ? HUMAN_WINS : checkDraw() ? DRAW : UNDECIDED;
 	}
 	
 	//if (depth == MAX_DEPTH){
@@ -202,8 +202,21 @@ bool SuperTTT::playMove(Side s, int board, int row, int column) {
 	return true;
 }
 
-bool SuperTTT::boardIsFull() const {
-	return none_of(boards[0].cbegin(), boards[0].cend(), [](Side s) {
+bool SuperTTT::checkDraw() const {
+	int boardsLeft = 9;
+	for (int b = 1; b < 10; b++){
+		if (boards[0]((b-1)/3,(b-1)%3) != EMPTY){
+			boardsLeft--;
+		}
+		else if (boardIsFull(b)){
+			boardsLeft--;
+		}
+	}
+	return (boardsLeft == 0);
+}
+
+bool SuperTTT::boardIsFull(int b) const {
+	return none_of(boards[b].cbegin(), boards[b].cend(), [](Side s) {
 		return s == EMPTY;
 	});
 }
@@ -217,7 +230,7 @@ bool SuperTTT::checkFalseBoardMove(int board){
 	//	return true;
 	//}
 	//else if (isAWin(HUMAN, nextBoard) || isAWin(COMPUTER, nextBoard)){
-	else if (boards[0](prow, pcolumn) != EMPTY){ // check if somebody has won on next board
+	else if ((boards[0](prow, pcolumn) != EMPTY) || boardIsFull(nextBoard)){ // check if somebody has won on next board
 		return false;
 	}
 	return (board != nextBoard);

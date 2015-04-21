@@ -125,7 +125,7 @@ void BasicDrawPanel::mouseReleased(wxMouseEvent& event){
 		frame->SetTopBar(wxT("Player wins!!"));
 		//frame->topBar->SetLabel(wxT("Human wins!!"));
 	}
-	else if (t.boardIsFull()) {
+	else if (t.checkDraw()) {
 		frame->SetTopBar(wxT("Draw!!"));
 		//frame->topBar->SetLabel(wxT("Draw!!"));
 	}
