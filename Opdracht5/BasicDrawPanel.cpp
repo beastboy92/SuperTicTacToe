@@ -19,8 +19,8 @@ EVT_LEFT_DOWN(BasicDrawPanel::mouseDown)
 EVT_LEFT_UP(BasicDrawPanel::mouseReleased)
 wxEND_EVENT_TABLE()
 
-BasicDrawPanel::BasicDrawPanel(wxPanel* parent, SuperTTT& t, int panel, int size) :
-wxPanel(parent, -1, wxDefaultPosition, wxSize(size, size)), cross(false), click(false), t(t), panel(panel)
+BasicDrawPanel::BasicDrawPanel(wxPanel* parent, SuperTTT& t, int board, int row, int column, int size) :
+wxPanel(parent, -1, wxDefaultPosition, wxSize(size, size)), cross(false), click(false), t(t), board(board), row(row), column(column)
 {
 }
 
@@ -43,19 +43,10 @@ void BasicDrawPanel::paintNow()
 
 void BasicDrawPanel::mouseDown(wxMouseEvent& event)
 {
-	int board = panel / 9;
-	int rest = panel % 9;
-	int row = rest / 3;
-	int column = rest % 3;
-
 	TTTFrame *frame = static_cast < TTTFrame *>(this->GetParent()->GetParent());
-	/*std::string tmp;
-	tmp = "Next board: ";
-	tmp.append(std::to_string((column + 1) + (row * 3)));*/
 
 	wxString tmp;
-	tmp = wxT("Next board: ");
-	tmp << (column + 1) + (row * 3);
+	tmp << wxT("Next board = ") << (column + 1) + (row * 3);
 
 	if (t.isUndecided()){
 		if (t.giveLastPlayer() == SuperTTT::HUMAN){
@@ -83,19 +74,11 @@ void BasicDrawPanel::mouseDown(wxMouseEvent& event)
 
 void BasicDrawPanel::computerMove()
 {
-	int board = panel / 9;
-	int rest = panel % 9;
-	int row = rest / 3;
-	int column = rest % 3;
-
 	TTTFrame *frame = static_cast < TTTFrame *>(this->GetParent()->GetParent());
-	/*std::string tmp;
-	tmp = "Next board: ";
-	tmp.append(std::to_string((column + 1) + (row * 3)));*/
 
 	wxString tmp;
-	tmp = wxT("Next board: ");
-	tmp << (column + 1) + (row * 3);
+	tmp << wxT("Computer plays: board = ") << board << wxT(" row = ") << row << wxT(" column = ") << column;
+	tmp << wxT(" Next board = ") << (column + 1) + (row * 3);
 
 	if (t.playMove(SuperTTT::COMPUTER, board, row, column)){
 		click = true;
@@ -115,19 +98,15 @@ void BasicDrawPanel::mouseReleased(wxMouseEvent& event){
 
 	if (t.isAWin(SuperTTT::COMPUTER, 0) && !frame->GivePvP()) {
 		frame->SetTopBar(wxT("Computer wins!!"));
-		//frame->topBar->SetLabel(wxT("Computer wins!!"));
 	}
 	else if (t.isAWin(SuperTTT::COMPUTER, 0) && frame->GivePvP()) {
 		frame->SetTopBar(wxT("Player 2 wins!!"));
-		//frame->topBar->SetLabel(wxT("Computer wins!!"));
 	}
 	else if (t.isAWin(SuperTTT::HUMAN, 0)) {
 		frame->SetTopBar(wxT("Player wins!!"));
-		//frame->topBar->SetLabel(wxT("Human wins!!"));
 	}
 	else if (t.checkDraw()) {
 		frame->SetTopBar(wxT("Draw!!"));
-		//frame->topBar->SetLabel(wxT("Draw!!"));
 	}
 }
 
@@ -151,8 +130,6 @@ void BasicDrawPanel::render(wxDC&  dc)
 	dc.DrawLine(300, 100, 700, 300); // draw line across the rectangle*/
 
 	int width, heigth;
-
-
 	DoGetClientSize(&width, &heigth);
 
 	dc.SetBrush(*wxLIGHT_GREY_BRUSH);

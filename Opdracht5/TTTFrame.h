@@ -28,7 +28,7 @@ private:
 	typedef matrix<BasicDrawPanel*, 3, 3> DrawPanel;
 	//DrawPanel drawPanel;
 
-	std::array<DrawPanel, 10> drawPanels;
+	std::array<DrawPanel, 10> drawPanels; // [0] unused but for future use
 	std::array<wxGridSizer*, 10> playField;
 	SuperTTT t;
 
