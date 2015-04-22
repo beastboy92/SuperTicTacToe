@@ -23,12 +23,16 @@ int SuperTTT::value(int depth) const {
 			for (int b = 1; b < 10; b++){
 				int row = (b - 1) / 3;
 				int column = (b - 1) % 3;
-				// if board is won, set board value to 6 (COMPUTER_WINS) or -6 (HUMAN_WINS) else count difference between moves
+				// if board is won, set board value to 7 (COMPUTER_WINS) or -7 (HUMAN_WINS) else count difference between moves
 				if (boards[0](row, column) == COMPUTER){
 					boardValues[b - 1] = 7;
 				}
 				else if (boards[0](row, column) == HUMAN){
 					boardValues[b - 1] = -7;
+				}
+				// if there is a draw on a board, set board value to 0
+				else if (boardIsFull(b)){
+					boardValues[b - 1] = 0;
 				}
 				else{
 					for_each(boards[b].cbegin(), boards[b].cend(), [&](Side s){
@@ -198,7 +202,7 @@ bool SuperTTT::playMove(Side s, int board, int row, int column) {
 	boards[board](row, column) = s;
 	prow = row;
 	pcolumn = column;
-	//cout << "Next board: " << (column + 1) + (row * 3) << endl;
+	cout << "Next board: " << (column + 1) + (row * 3) << endl;
 	return true;
 }
 
