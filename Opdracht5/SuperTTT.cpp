@@ -10,8 +10,6 @@ SuperTTT::SuperTTT(Side s) : prow(-1), pcolumn(-1), lastPlayer(s){
 
 //SuperTTT::Value SuperTTT::value(int depth, int board) const {
 int SuperTTT::value(int depth) const {
-	array<int, 9> boardValues;
-	boardValues.fill(0);
 	if (depth == MAX_DEPTH){
 		if (isAWin(COMPUTER, 0)){
 			return COMPUTER_WINS;
@@ -20,15 +18,21 @@ int SuperTTT::value(int depth) const {
 			return HUMAN_WINS;
 		}
 		else{
+			array<int, 9> boardValues;
+			boardValues.fill(0);
 			for (int b = 1; b < 10; b++){
 				int row = (b - 1) / 3;
 				int column = (b - 1) % 3;
-				// if board is won, set board value to 6 (COMPUTER_WINS) or -6 (HUMAN_WINS) else count difference between moves
+				// if board is won, set board value to 7 (COMPUTER_WINS) or -7 (HUMAN_WINS) else count difference between moves
 				if (boards[0](row, column) == COMPUTER){
 					boardValues[b - 1] = 7;
 				}
 				else if (boards[0](row, column) == HUMAN){
 					boardValues[b - 1] = -7;
+				}
+				// if there is a draw on a board, set board value to 0
+				else if (boardIsFull(b)){
+					boardValues[b - 1] = 0;
 				}
 				else{
 					for_each(boards[b].cbegin(), boards[b].cend(), [&](Side s){
