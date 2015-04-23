@@ -11,7 +11,7 @@ const int MAX_DEPTH = 9;
 
 class SuperTTT{
 public:
-	enum Side { EMPTY, HUMAN, COMPUTER };
+	enum Side { EMPTY, HUMAN, COMPUTER, FULL};
 	enum Value { HUMAN_WINS = -52, DRAW = 0, COMPUTER_WINS = 52, UNDECIDED = 53};
 
 	SuperTTT(Side s = SuperTTT::COMPUTER);
@@ -24,7 +24,7 @@ public:
 	Side side(int row, int column, int board) const;
 	bool isUndecided() const;
 	bool playMove(Side s, int board, int row, int column);
-	bool checkDraw() const;
+	//bool checkDraw() const;
 	bool boardIsFull(int b) const;
 	bool checkFalseBoardMove(int board);
 	// old unused functions
