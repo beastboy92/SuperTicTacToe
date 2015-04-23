@@ -15,6 +15,7 @@ public:
 	void SetTopBar(const wxString &message);
 	void doComputerMove();
 	bool GivePvP();
+	SuperTTT* giveGame();
 
 	//wxMenu *edit;
 	//wxMenu *help;

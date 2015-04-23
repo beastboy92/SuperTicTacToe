@@ -26,7 +26,7 @@ TTTFrame::TTTFrame(const wxString& title, bool computerFirst)
 		for (int row = 0; row < 3; ++row) {
 			for (int column = 0; column < 3; ++column)
 			{
-				drawPanels[board](row, column) = new BasicDrawPanel(panel, t, board, row, column, sizeY);
+				drawPanels[board](row, column) = new BasicDrawPanel(panel, board, row, column, sizeY);
 			}
 		}
 	}
@@ -106,6 +106,10 @@ bool TTTFrame::GivePvP(){
 
 void TTTFrame::SetTopBar(const wxString &message){
 	topBar->SetLabel(message);
+}
+
+SuperTTT* TTTFrame::giveGame(){
+	return &t;
 }
 
 void TTTFrame::OnExit(wxCommandEvent& event)

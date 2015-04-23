@@ -5,10 +5,9 @@
 
 class BasicDrawPanel : public wxPanel
 {
-
 public:
 	//BasicDrawPanel(wxPanel* parent, SuperTTT& t, int panel, int size);
-	BasicDrawPanel(wxPanel* parent, SuperTTT& t, int board, int row, int column, int size);
+	BasicDrawPanel(wxPanel* parent, int board, int row, int column, int size);
 
 	void paintEvent(wxPaintEvent & evt);
 	void mouseDown(wxMouseEvent& event);
@@ -37,7 +36,6 @@ private:
 	int row;
 	int column;
 	//int panel;
-	SuperTTT& t;
 
 	wxDECLARE_EVENT_TABLE();
 };
