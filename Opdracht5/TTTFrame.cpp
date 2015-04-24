@@ -19,7 +19,7 @@ TTTFrame::TTTFrame(const wxString& title, bool computerFirst)
 	panel = new wxPanel(this, -1);
 	wxBoxSizer *vbox = new wxBoxSizer(wxVERTICAL);
 
-	topBar = new wxStaticText(panel, -1, wxT("Welcome to Tic Tac Toe"));
+	topBar = new wxStaticText(panel, -1, wxT("Welcome to Super Tic Tac Toe"));
 	
 	wxSize size = wxGetDisplaySize();
 	int sizeY = size.GetY();

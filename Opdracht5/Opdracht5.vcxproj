@@ -81,14 +81,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BasicDrawPanel.cpp" />
-    <ClCompile Include="ConsoleTTTGame.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="SuperTTT.cpp" />
     <ClCompile Include="TTTFrame.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BasicDrawPanel.h" />
-    <ClInclude Include="ConsoleTTTGame.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="Matrix.h" />
     <ClInclude Include="SuperTTT.h" />
