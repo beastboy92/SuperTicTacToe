@@ -111,6 +111,8 @@ void ConsoleTTTGame::printBoard() const {
 				cout << computerSymbol;
 			else if (t.side(row, column, 0) == SuperTTT::HUMAN)
 				cout << humanSymbol;
+			else if (t.side(row, column, 0) == SuperTTT::FULL)
+				cout << '-';
 			else
 				cout << ' ';
 			cout << endl;
