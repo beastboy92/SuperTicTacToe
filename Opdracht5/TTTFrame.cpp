@@ -94,6 +94,7 @@ void TTTFrame::doComputerMove(){
 		//bestBoard = t.giveNextBoard();
 		//t.giveRandomBoardWhenWon(bestBoard); // prevent computer to set on board that is won
 		//t.giveBestBoardWhenWon(bestBoard, SuperTTT::COMPUTER); // prevent computer to set on board that is won and give best board to set next move
+		t.findFirstValidMove(bestRow, bestColumn, bestBoard);
 		t.chooseComputerMove(bestRow, bestColumn, bestBoard);
 
 		drawPanels[bestBoard](bestRow, bestColumn)->computerMove();

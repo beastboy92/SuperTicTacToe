@@ -186,6 +186,23 @@ int SuperTTT::chooseHumanMove(int& bestRow, int& bestColumn, int& bestBoard, int
 	return bestValue;
 }
 
+void SuperTTT::findFirstValidMove(int& validRow, int& validColumn, int& validBoard){
+	for (int board = 1; board < 10; ++board){
+		if (!checkFalseBoardMove(board) && boards[0]((board - 1) / 3, (board - 1) % 3) == EMPTY){
+			for (int row = 0; row < 3; ++row) {
+				for (int column = 0; column < 3; ++column) {
+					if (boards[board](row, column) == EMPTY) {
+						validRow = row;
+						validColumn = column;
+						validBoard = board;
+						return;
+					}
+				}
+			}
+		}
+	}
+}
+
 SuperTTT::Side SuperTTT::side(int row, int column, int board) const {
 	return boards[board](row, column);
 }

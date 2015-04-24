@@ -21,6 +21,8 @@ public:
 	//Value chooseHumanMove(int& bestRow, int& bestColumn, int& bestBoard, Value alpha = HUMAN_WINS, Value beta = COMPUTER_WINS, int depth = 1);
 	int chooseHumanMove(int& bestRow, int& bestColumn, int& bestBoard, int alpha = HUMAN_WINS, int = COMPUTER_WINS, int depth = 1);
 
+	void findFirstValidMove(int& validRow, int& validColumn, int& validBoard);
+
 	Side side(int row, int column, int board) const;
 	bool isUndecided() const;
 	bool playMove(Side s, int board, int row, int column);
