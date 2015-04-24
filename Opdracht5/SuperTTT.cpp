@@ -2,7 +2,7 @@
 
 using namespace std;
 
-SuperTTT::SuperTTT(Side s) : prow(-1), pcolumn(-1), lastPlayer(s){
+SuperTTT::SuperTTT(Side s, int DEPTH) : prow(-1), pcolumn(-1), lastPlayer(s), MAX_DEPTH(DEPTH){
 	for_each(boards.begin(), boards.end(), [](Board& board){
 		fill(board.begin(), board.end(), EMPTY);
 	});

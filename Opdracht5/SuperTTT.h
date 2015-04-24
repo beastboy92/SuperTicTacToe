@@ -6,15 +6,19 @@
 #include <string>
 #include <array>
 #include "Matrix.h"
+/* Depth index
+	9 = fast and hard to win
+	10 = fast and undefeatable?
+	12 = slower (+/- 1 second)
+*/
 
-const int MAX_DEPTH = 9;
 
 class SuperTTT{
 public:
 	enum Side { EMPTY, HUMAN, COMPUTER, FULL};
 	enum Value { HUMAN_WINS = -52, DRAW = 0, COMPUTER_WINS = 52, UNDECIDED = 53};
 
-	SuperTTT(Side s = SuperTTT::COMPUTER);
+	SuperTTT(Side s = SuperTTT::COMPUTER, const int DEPTH = 9);
 
 	//Value chooseComputerMove(int& bestRow, int& bestColumn, int& bestBoard, Value alpha = HUMAN_WINS, Value beta = COMPUTER_WINS, int depth = 1);
 	int chooseComputerMove(int& bestRow, int& bestColumn, int& bestBoard, int alpha = HUMAN_WINS, int beta = COMPUTER_WINS, int depth = 1);
@@ -40,6 +44,7 @@ public:
 private:
 	int movesConsidered = 0;
 	int prow, pcolumn;
+	const int MAX_DEPTH;
 	typedef matrix<Side, 3, 3> Board;
 	//Board board;
 	std::array<Board, 10> boards;
