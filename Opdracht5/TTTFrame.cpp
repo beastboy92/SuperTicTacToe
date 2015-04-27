@@ -97,8 +97,9 @@ TTTFrame::TTTFrame(const wxString& title, bool computerFirst)
 
 	SetMenuBar(menubar);
 	CreateStatusBar();
+	sizeY = GetStatusBar()->GetSize().GetHeight();
 	size = playField[0]->GetSize();
-	size.Set(size.GetWidth() + 50, size.GetHeight() + 3*topBar->GetSize().GetHeight() + 45 + 10);
+	size.Set(size.GetWidth() + 50, size.GetHeight() + 3 * topBar->GetSize().GetHeight() + 45 + sizeY);
 	SetInitialSize(size);
 	SetMaxSize(size);
 }

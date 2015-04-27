@@ -132,18 +132,26 @@ void BasicDrawPanel::render(wxDC&  dc)
 	int width, heigth;
 	DoGetClientSize(&width, &heigth);
 
-	dc.SetBrush(*wxLIGHT_GREY_BRUSH);
-	//dc.SetBrush(*wxRED_BRUSH);
-	dc.DrawRectangle(0, 0, width, width);
-
 	if (click){
 		if (cross){
+			dc.SetBrush(*wxRED_BRUSH);
+			dc.DrawRectangle(0, 0, width, width);
+			dc.SetPen(*wxLIGHT_GREY_PEN);
 			dc.DrawLine(5, 5, width - 5, heigth - 5);
 			dc.DrawLine(width - 5, 5, 5, heigth - 5);
 		}
 		else
 		{
+			dc.SetBrush(*wxBLUE_BRUSH);
+			dc.DrawRectangle(0, 0, width, width);
+			dc.SetPen(*wxLIGHT_GREY_PEN);
 			dc.DrawCircle(width / 2, heigth / 2, width / 2 - 5 /* radius */);
 		}
+	}
+	else{
+		//dc.SetBrush(*wxGREY_BRUSH);
+		dc.SetBrush(*wxLIGHT_GREY_BRUSH);
+		//dc.SetBrush(*wxRED_BRUSH);
+		dc.DrawRectangle(0, 0, width, width);
 	}
 }
