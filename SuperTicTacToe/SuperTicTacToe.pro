@@ -26,12 +26,14 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    SuperTTT.cpp
+    SuperTTT.cpp \
+    basicdrawpanel.cpp
 
 HEADERS += \
         mainwindow.h \
     Matrix.h \
-    SuperTTT.h
+    SuperTTT.h \
+    basicdrawpanel.h
 
 FORMS += \
         mainwindow.ui
