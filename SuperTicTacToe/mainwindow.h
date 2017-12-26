@@ -21,6 +21,7 @@ public:
 
 private slots:
     void playMove(int board, int row, int column);
+    void reset();
 
 private:
     typedef matrix<BasicDrawPanel*, 3, 3> DrawPanel;
@@ -28,7 +29,7 @@ private:
     Ui::MainWindow *ui;
     QVector<DrawPanel> drawPanels;
     QVector<QGridLayout*> playField;
-
+    SuperTTT* game;
 };
 
 #endif // MAINWINDOW_H

@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QPushButton>
 #include <QTimer>
+#include "SuperTTT.h"
 
 class BasicDrawPanel : public QPushButton
 {
@@ -14,12 +15,14 @@ public:
 signals:
     void playMove(int board, int row, int column);
 
+public slots:
+    void showMove(SuperTTT::Side s);
+    void reset();
+
 private slots:
     void doMove();
 
 private:
-    bool cross;
-    bool click;
     int board;
     int row;
     int column;
