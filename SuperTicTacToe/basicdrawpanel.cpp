@@ -20,19 +20,24 @@ void BasicDrawPanel::showMove(SuperTTT::Side s)
     if(s == SuperTTT::HUMAN)
     {
         this->setText("X");
+        this->setStyleSheet(QStringLiteral("background-color: rgb(102, 153, 255);"
+                                            "color: rgb(0, 0, 0);"));
     }
     else if(s == SuperTTT::COMPUTER)
     {
         this->setText("O");
+        this->setStyleSheet(QStringLiteral("background-color: rgb(255, 77, 77);"
+                                            "color: rgb(0, 0, 0);"));
     }
     this->setDisabled(true);
-
 }
 
 void BasicDrawPanel::reset()
 {
     this->setText("");
     this->setDisabled(false);
+    this->setStyleSheet(QStringLiteral("background-color: rgb(191, 191, 191);"
+                                        "color: rgb(0, 0, 0);"));
 }
 
 void BasicDrawPanel::doMove()

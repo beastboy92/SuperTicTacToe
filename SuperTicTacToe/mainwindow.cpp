@@ -36,8 +36,7 @@ MainWindow::MainWindow(QWidget *parent) :
             for (int column = 0; column < 3; ++column)
             {
                 playField[i]->addWidget(drawPanels[i+1](row, column), row, column);
-                drawPanels[i+1](row, column)->setStyleSheet(QStringLiteral("background-color: rgb(191, 191, 191);"
-                                                                           "color: rgb(0, 0, 0);"));
+                drawPanels[i+1](row, column)->reset();
             }
         }
         ui->centralGrid->addLayout(playField[i], i/3, i%3, 1 ,1);
@@ -137,6 +136,7 @@ void MainWindow::reset()
             p->reset();
         }
     });
+
     ui->statusBar->showMessage("New Game");
     if (computerFirst && !ui->actionPVP->isChecked()){
         doComputerMove();
