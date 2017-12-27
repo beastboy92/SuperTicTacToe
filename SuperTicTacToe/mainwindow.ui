@@ -43,17 +43,12 @@
     <property name="title">
      <string>Settings</string>
     </property>
-    <widget class="QMenu" name="menuDiffilculty">
+    <widget class="QMenu" name="menuDifficulty">
      <property name="title">
-      <string>Diffilculty</string>
+      <string>Difficulty</string>
      </property>
-     <addaction name="actionEasy"/>
-     <addaction name="actionMedium"/>
-     <addaction name="actionHard"/>
-     <addaction name="actionExtreme"/>
-     <addaction name="actionUnwinnable"/>
     </widget>
-    <addaction name="menuDiffilculty"/>
+    <addaction name="menuDifficulty"/>
     <addaction name="actionPVP"/>
    </widget>
    <addaction name="menuSuper"/>
@@ -63,6 +58,9 @@
   <action name="actionReset">
    <property name="text">
     <string>Reset</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+R</string>
    </property>
   </action>
   <action name="actionExit">
@@ -76,31 +74,6 @@
    </property>
    <property name="text">
     <string>PVP</string>
-   </property>
-  </action>
-  <action name="actionEasy">
-   <property name="text">
-    <string>Easy</string>
-   </property>
-  </action>
-  <action name="actionMedium">
-   <property name="text">
-    <string>Medium</string>
-   </property>
-  </action>
-  <action name="actionHard">
-   <property name="text">
-    <string>Hard</string>
-   </property>
-  </action>
-  <action name="actionExtreme">
-   <property name="text">
-    <string>Extreme</string>
-   </property>
-  </action>
-  <action name="actionUnwinnable">
-   <property name="text">
-    <string>Unwinnable</string>
    </property>
   </action>
  </widget>

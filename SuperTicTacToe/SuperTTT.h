@@ -38,10 +38,9 @@ public:
 private:
 	int movesConsidered = 0;
 	int prow, pcolumn;
+    Side lastPlayer;
 	const int MAX_DEPTH;
 	typedef matrix<Side, 3, 3> Board;
-	//Board board;
 	std::array<Board, 10> boards;
-	int value(int depth = 0) const;
-	Side lastPlayer;
+	int value(int depth = 0) const;	
 };
