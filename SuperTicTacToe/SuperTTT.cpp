@@ -211,14 +211,21 @@ void SuperTTT::checkWins(Side s){
 }
 
 bool SuperTTT::isAWin(Side s, int b) const {
-	for (int i = 0; i < 3; ++i) {
-		if ((boards[b](i, 0) == s && boards[b](i, 1) == s && boards[b](i, 2) == s) ||
-			(boards[b](0, i) == s && boards[b](1, i) == s && boards[b](2, i) == s)) {
-			return true;
-		}
-	}
-	return (boards[b](0, 0) == s && boards[b](1, 1) == s && boards[b](2, 2) == s) ||
-		(boards[b](0, 2) == s && boards[b](1, 1) == s && boards[b](2, 0) == s);
+    if((b == 0) || (boards[0]((b - 1) / 3, (b - 1) % 3) == EMPTY))
+    {
+        for (int i = 0; i < 3; ++i) {
+            if ((boards[b](i, 0) == s && boards[b](i, 1) == s && boards[b](i, 2) == s) ||
+                (boards[b](0, i) == s && boards[b](1, i) == s && boards[b](2, i) == s)) {
+                return true;
+            }
+        }
+        return (boards[b](0, 0) == s && boards[b](1, 1) == s && boards[b](2, 2) == s) ||
+            (boards[b](0, 2) == s && boards[b](1, 1) == s && boards[b](2, 0) == s);
+    }
+    else
+    {
+        return (boards[0]((b - 1) / 3, (b - 1) % 3) == s);
+    }
 }
 
 SuperTTT::Side SuperTTT::giveLastPlayer() const{

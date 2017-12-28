@@ -71,26 +71,31 @@ void MainWindow::playMove(int board, int row, int column)
             game->setLastPlayer(turn);
             game->checkWins(turn);
             drawPanels[board](row, column)->showMove(turn);
-            ui->statusBar->showMessage(QString("Next board = %1").arg((column+1)+(row*3)));
 
             if(turn == SuperTTT::HUMAN && !ui->actionPVP->isChecked())
             {
                 doComputerMove();
             }
-        }
-    }
 
-    if (game->isAWin(SuperTTT::COMPUTER, 0) && !ui->actionPVP->isChecked()) {
-        ui->statusBar->showMessage("Computer wins!!");
-    }
-    else if (game->isAWin(SuperTTT::COMPUTER, 0) && ui->actionPVP->isChecked()) {
-        ui->statusBar->showMessage("Player 2 wins!!");
-    }
-    else if (game->isAWin(SuperTTT::HUMAN, 0)) {
-        ui->statusBar->showMessage("Player wins!!");
-    }
-    else if (game->boardIsFull(0)) {
-        ui->statusBar->showMessage("Draw!!");
+            if(ui->actionPVP->isChecked())
+                showNextBoard();
+        }
+
+        if (game->isAWin(SuperTTT::COMPUTER, 0) && !ui->actionPVP->isChecked()) {
+            ui->statusBar->showMessage("Computer wins!!");
+        }
+        else if (game->isAWin(SuperTTT::COMPUTER, 0) && ui->actionPVP->isChecked()) {
+            ui->statusBar->showMessage("Player 2 wins!!");
+        }
+        else if (game->isAWin(SuperTTT::HUMAN, 0)) {
+            ui->statusBar->showMessage("Player wins!!");
+        }
+        else if (game->boardIsFull(0)) {
+            ui->statusBar->showMessage("Draw!!");
+        }
+        else{
+            ui->statusBar->showMessage("");
+        }
     }
 }
 
@@ -186,5 +191,26 @@ void MainWindow::doComputerMove()
         game->chooseComputerMove(bestRow, bestColumn, bestBoard);
 
         playMove(bestBoard, bestRow, bestColumn);
+        showNextBoard();
     }
+}
+
+void MainWindow::showNextBoard()
+{
+    for(int i = 1; i < 10 ; i++)
+    {
+        if(!(game->isAWin(SuperTTT::HUMAN, i) || game->isAWin(SuperTTT::COMPUTER, i) || game->checkFalseBoardMove(i)))
+        {
+            for (auto p : drawPanels[i]){
+                p->enableTile();
+            }
+        }
+        else
+        {
+            for (auto p : drawPanels[i]){
+                p->disableTile();
+            }
+        }
+    }
+
 }

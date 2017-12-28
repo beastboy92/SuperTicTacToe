@@ -32,6 +32,24 @@ void BasicDrawPanel::showMove(SuperTTT::Side s)
     this->setDisabled(true);
 }
 
+void BasicDrawPanel::disableTile()
+{
+    if(this->text().isEmpty())
+    {
+        this->setStyleSheet(QStringLiteral("background-color: rgb(128, 128, 128);"));
+        this->setDisabled(true);
+    }
+}
+
+void BasicDrawPanel::enableTile()
+{
+    if(this->text().isEmpty())
+    {
+        this->setStyleSheet(QStringLiteral("background-color: rgb(191, 191, 191);"));
+        this->setDisabled(false);
+    }
+}
+
 void BasicDrawPanel::reset()
 {
     this->setText("");

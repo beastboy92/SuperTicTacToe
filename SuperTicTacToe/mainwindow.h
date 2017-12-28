@@ -32,6 +32,7 @@ private slots:
 private:
     void createActions();
     void doComputerMove();
+    void showNextBoard();
 
     typedef matrix<BasicDrawPanel*, 3, 3> DrawPanel;
 

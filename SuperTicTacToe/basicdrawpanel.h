@@ -17,6 +17,8 @@ signals:
 
 public slots:
     void showMove(SuperTTT::Side s);
+    void disableTile();
+    void enableTile();
     void reset();
 
 private slots:
