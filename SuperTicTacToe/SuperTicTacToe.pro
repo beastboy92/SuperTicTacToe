@@ -22,6 +22,10 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
+build_nr.commands = ..\SuperTicTacToe\date.cmd
+build_nr.depends = FORCE
+QMAKE_EXTRA_TARGETS += build_nr
+PRE_TARGETDEPS += build_nr
 
 SOURCES += \
         main.cpp \
@@ -33,7 +37,8 @@ HEADERS += \
         mainwindow.h \
     Matrix.h \
     SuperTTT.h \
-    basicdrawpanel.h
+    basicdrawpanel.h \
+    version.h
 
 FORMS += \
         mainwindow.ui

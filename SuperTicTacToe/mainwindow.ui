@@ -14,9 +14,6 @@
    <string>Super Tic Tac Toe</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <property name="styleSheet">
-    <string notr="true">background-color: rgb(94, 94, 94);</string>
-   </property>
    <layout class="QGridLayout" name="centralGrid">
     <property name="spacing">
      <number>15</number>
@@ -37,6 +34,7 @@
      <string>File</string>
     </property>
     <addaction name="actionReset"/>
+    <addaction name="actionInfo"/>
     <addaction name="actionExit"/>
    </widget>
    <widget class="QMenu" name="menuSettings">
@@ -74,6 +72,11 @@
    </property>
    <property name="text">
     <string>PVP</string>
+   </property>
+  </action>
+  <action name="actionInfo">
+   <property name="text">
+    <string>Info</string>
    </property>
   </action>
  </widget>

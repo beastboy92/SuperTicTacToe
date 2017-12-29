@@ -28,6 +28,7 @@ private slots:
     void onExtreme();
     void onUnwinnable();
     void reset();
+    void showInfo();
 
 private:
     void createActions();

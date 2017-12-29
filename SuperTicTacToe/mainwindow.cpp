@@ -1,6 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "SuperTTT.h"
+#include "version.h"
+#include <QMessageBox>
 #include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -44,6 +46,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(ui->actionReset, SIGNAL(triggered()), this, SLOT(reset()));
     connect(ui->actionExit, SIGNAL(triggered()), this, SLOT(close()));
+    connect(ui->actionInfo, SIGNAL(triggered()), this, SLOT(showInfo()));
 }
 
 MainWindow::~MainWindow()
@@ -53,8 +56,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::playMove(int board, int row, int column)
 {
-    //qDebug() << "board: " << board << " row: " << row << " column: " << column;
-    SuperTTT::Side turn;
+    SuperTTT::Side turn=SuperTTT::EMPTY;
     if(game->isUndecided())
     {
         if(game->giveLastPlayer() == SuperTTT::HUMAN)
@@ -77,24 +79,25 @@ void MainWindow::playMove(int board, int row, int column)
                 doComputerMove();
             }
 
-            if(ui->actionPVP->isChecked())
+            if(ui->actionPVP->isChecked() && game->isUndecided())
                 showNextBoard();
         }
 
-        if (game->isAWin(SuperTTT::COMPUTER, 0) && !ui->actionPVP->isChecked()) {
+        if (game->isAWin(SuperTTT::COMPUTER, 0) && !ui->actionPVP->isChecked() && (turn == SuperTTT::HUMAN)) {
             ui->statusBar->showMessage("Computer wins!!");
+            QMessageBox::about(this, "Winner", "Computer wins!!");
         }
         else if (game->isAWin(SuperTTT::COMPUTER, 0) && ui->actionPVP->isChecked()) {
             ui->statusBar->showMessage("Player 2 wins!!");
+            QMessageBox::about(this, "Winner", "Player 2 wins!!");
         }
         else if (game->isAWin(SuperTTT::HUMAN, 0)) {
             ui->statusBar->showMessage("Player wins!!");
+            QMessageBox::about(this, "Winner", "Player wins!!");
         }
         else if (game->boardIsFull(0)) {
             ui->statusBar->showMessage("Draw!!");
-        }
-        else{
-            ui->statusBar->showMessage("");
+            QMessageBox::about(this, "Winner", "Draw!!");
         }
     }
 }
@@ -148,6 +151,11 @@ void MainWindow::reset()
     }
 }
 
+void MainWindow::showInfo()
+{
+    QMessageBox::about(this, "Info", QString("Version: 1.0.0\nBuild: %1").arg(BUILDDATE));
+}
+
 void MainWindow::createActions()
 {
     difficulty = new QActionGroup(ui->menuDifficulty);
@@ -189,7 +197,7 @@ void MainWindow::doComputerMove()
         int bestRow, bestColumn, bestBoard;
         game->findFirstValidMove(bestRow, bestColumn, bestBoard);
         game->chooseComputerMove(bestRow, bestColumn, bestBoard);
-
+        ui->statusBar->showMessage(QString("Computer plays: board = %1 row = %2 column = %3").arg(bestBoard).arg(bestColumn).arg(bestBoard));
         playMove(bestBoard, bestRow, bestColumn);
         showNextBoard();
     }
