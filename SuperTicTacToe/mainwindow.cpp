@@ -197,7 +197,7 @@ void MainWindow::doComputerMove()
         int bestRow, bestColumn, bestBoard;
         game->findFirstValidMove(bestRow, bestColumn, bestBoard);
         game->chooseComputerMove(bestRow, bestColumn, bestBoard);
-        ui->statusBar->showMessage(QString("Computer plays: board = %1 row = %2 column = %3").arg(bestBoard).arg(bestColumn).arg(bestBoard));
+        ui->statusBar->showMessage(QString("Computer plays: board = %1 row = %2 column = %3").arg(bestBoard).arg(bestColumn).arg(bestColumn));
         playMove(bestBoard, bestRow, bestColumn);
         showNextBoard();
     }
